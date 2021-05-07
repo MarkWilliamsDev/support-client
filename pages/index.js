@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>GigCreate Support Client</title>
+        <title>Support Client</title>
         <meta name="description" content="Support Client for Web Apps" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
