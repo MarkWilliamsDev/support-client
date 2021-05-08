@@ -12,12 +12,12 @@ declare module 'apiTypes' {
     createdAt: Date
   }
 
-  export type TicketsProps = {
+  export type SupportTicketsProps = {
     supportTickets: SupportTicket[]
   }
 }
 
 module.exports = {
   SupportTicket,
-  TicketsProps,
+  SupportTicketsProps,
 }

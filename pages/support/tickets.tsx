@@ -1,20 +1,16 @@
 import { GetServerSideProps } from 'next'
 import { connectToDatabase } from '../../util/mongodb'
 
-import { TicketsProps } from 'apiTypes'
+import { SupportTicketsProps } from 'apiTypes'
 import ListContainer from '../../components/list/ListContainer'
 import SupportTicketListItem from '../../components/list/listItems/SupportTicketListItem'
 
-const tickets = ({ supportTickets }: TicketsProps) => {
+const tickets = ({ supportTickets }: SupportTicketsProps) => {
   return (
-    <div className="border">
-      <div>
-        <ListContainer
-          list={supportTickets}
-          ItemComponent={SupportTicketListItem}
-        />
-      </div>
-    </div>
+    <ListContainer
+      list={supportTickets}
+      ItemComponent={SupportTicketListItem}
+    />
   )
 }
 

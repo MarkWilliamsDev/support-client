@@ -1,31 +1,23 @@
 import { SupportTicket } from 'apiTypes'
-import { AnchorHTMLAttributes, forwardRef } from 'react'
+import Link from 'next/link'
 import StringDisplay from '../../display/elements/StringDisplay'
 
-interface SupportTicketListItemProps
-  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+type SupportTicketListItemProps = {
   item: SupportTicket
-  href: string
-  onClick: () => void
 }
 
-const SupportTicketListItem = forwardRef(
-  ({ item, href, onClick }: SupportTicketListItemProps, ref: any) => {
-    return (
-      <div className="mx-3 my-2">
-        <a
-          className="text-decoration-none text-dark"
-          href={href}
-          onClick={onClick}
-          ref={ref}
-        >
+const SupportTicketListItem = ({ item }: SupportTicketListItemProps) => {
+  return (
+    <div className="mx-3 my-2">
+      <Link href={`/support/ticket?id=${item._id}`}>
+        <a className="text-decoration-none text-dark">
           <StringDisplay label={'ID: '} content={item._id} />
           <StringDisplay label={'Name: '} content={item.name} />
           <StringDisplay label={'Subject: '} content={item.subject} />
         </a>
-      </div>
-    )
-  }
-)
+      </Link>
+    </div>
+  )
+}
 
 export default SupportTicketListItem
