@@ -12,7 +12,7 @@ declare module 'apiTypes' {
     createdAt: Date
   }
 
-  export interface TicketsProps {
+  export type TicketsProps = {
     supportTickets: SupportTicket[]
   }
 }
