@@ -3,11 +3,7 @@ import { connectToDatabase } from '../../util/mongodb'
 
 import { TicketsProps } from 'apiTypes'
 import ListContainer from '../../components/list/ListContainer'
-import SupportTicketListItem from '../../components/listItems/SupportTicketListItem'
-
-// type TicketsProps = {
-//   supportTickets: SupportTicket[]
-// }
+import SupportTicketListItem from '../../components/list/listItems/SupportTicketListItem'
 
 const tickets = ({ supportTickets }: TicketsProps) => {
   return (
@@ -15,7 +11,7 @@ const tickets = ({ supportTickets }: TicketsProps) => {
       <div>
         <ListContainer
           list={supportTickets}
-          ListItemComponent={SupportTicketListItem}
+          ItemComponent={SupportTicketListItem}
         />
       </div>
     </div>

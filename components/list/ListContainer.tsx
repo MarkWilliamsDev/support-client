@@ -1,14 +1,27 @@
-import ListItemContainer from '../listItems/ListItemContainer'
+import { SupportTicket } from 'apiTypes'
+import { ComponentType } from 'react'
+import ItemContainer from './listItems/ItemContainer'
 
-function ListContainer({ list, ListItemComponent }) {
+type ItemComponentProps = {
+  item: SupportTicket
+}
+
+type ListContainerProps = {
+  list: SupportTicket[]
+  ItemComponent: ComponentType<ItemComponentProps>
+}
+
+function ListContainer({ list, ItemComponent }: ListContainerProps) {
+  const renderItemComponent = (item: SupportTicket) => {
+    return <ItemComponent item={item} />
+  }
+
   const renderList = () => {
     return list.map((item) => {
       return (
-        <ListItemContainer
-          key={item._id}
-          item={item}
-          ListItemComponent={ListItemComponent}
-        />
+        <ItemContainer key={item._id}>
+          {renderItemComponent(item)}
+        </ItemContainer>
       )
     })
   }
