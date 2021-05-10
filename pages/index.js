@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
-import ButtonContainer from '../components/ui/buttons/ButtonContainer'
-import LinkButton from '../components/ui/buttons/LinkButton'
+import ButtonContainer from '../src/components/ui/buttons/ButtonContainer'
+import LinkButton from '../src/components/ui/buttons/LinkButton'
 
 export default function Home() {
   return (

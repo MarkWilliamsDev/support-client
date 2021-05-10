@@ -1,5 +1,5 @@
 function ItemContainer({ children }) {
-  return <div>{children}</div>
+  return <>{children}</>
 }
 
 export default ItemContainer
