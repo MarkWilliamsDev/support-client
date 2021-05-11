@@ -1,22 +1,15 @@
-import axios from 'axios'
 import { FormEvent } from 'react'
 
-function useFormSubmit(
-  inputValues: {},
-  callback: (res: {}) => void,
-  formId: string
-) {
-  const formSubmitHandler = async (e: FormEvent) => {
+const useFormSubmit = (inputValues, formId: string, store) => {
+  const formSubmitHandler = (e: FormEvent) => {
     e.preventDefault()
-    const res = await axios.put('/api/support/tickets', {
-      ...inputValues,
-    })
+
+    store.setIsPending()
+    store.addSubItem(inputValues)
 
     const formElement = document.getElementById(formId) as HTMLFormElement
 
     formElement.reset()
-
-    callback(res.data)
   }
 
   return formSubmitHandler

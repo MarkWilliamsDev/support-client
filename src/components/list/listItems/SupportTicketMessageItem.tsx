@@ -5,7 +5,7 @@ import StringDisplay from '../../display/elements/StringDisplay'
 
 function SupportTicketMessageItem({ item }: { item: SupportTicketMessage }) {
   return (
-    <div className={`row ${item.isFromUser && 'justify-content-end'}`}>
+    <div className={`row ${!item.isFromUser && 'justify-content-end'}`}>
       <div className="col-11">
         <div className="row border mt-2">
           <div className="col">

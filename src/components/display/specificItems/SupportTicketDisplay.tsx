@@ -1,14 +1,14 @@
 import { SupportTicket } from 'apiTypes'
-import SupportTicketReplyForm from '../../forms/specificForms/SupportTicketReplyForm'
 import ListContainer from '../../list/ListContainer'
 import SupportTicketMessageItem from '../../list/listItems/SupportTicketMessageItem'
+import DateDisplay from '../elements/DateDisplay'
 import StringDisplay from '../elements/StringDisplay'
 
 function SupportTicketDisplay({ item }: { item: SupportTicket }) {
   const renderMessages = () => {
     return (
       <ListContainer
-        list={item.messages}
+        list={item?.messages}
         ItemComponent={SupportTicketMessageItem}
       />
     )
@@ -20,21 +20,24 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
         <div className="row">
           <div className="col">
             <div>
-              <StringDisplay label={'Name: '} content={item.name} />
+              <StringDisplay label={'Name: '} content={item?.name} />
             </div>
             <div>
-              <StringDisplay label={'Subject: '} content={item.subject} />
+              <StringDisplay label={'Subject: '} content={item?.subject} />
             </div>
             <div>
-              <StringDisplay label={'Status: '} content={item.ticketStatus} />
+              <StringDisplay label={'Status: '} content={item?.ticketStatus} />
             </div>
           </div>
           <div className="col">
             <div>
-              <StringDisplay label={'Ticket ID: '} content={item._id} />
+              <DateDisplay date={item?.createdAt} />
             </div>
             <div>
-              <StringDisplay label={'User ID: '} content={item._user} />
+              <StringDisplay label={'Ticket ID: '} content={item?._id} />
+            </div>
+            <div>
+              <StringDisplay label={'User ID: '} content={item?._user} />
             </div>
           </div>
         </div>

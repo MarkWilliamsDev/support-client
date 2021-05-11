@@ -1,16 +1,17 @@
 import { SupportTicket } from 'apiTypes'
+import Link from 'next/link'
 import DateDisplay from '../../display/elements/DateDisplay'
 import StringDisplay from '../../display/elements/StringDisplay'
 
 type SupportTicketListItemProps = {
   item: SupportTicket
-  onItemSelect: (selectedItem: SupportTicket) => void
+  // onItemSelect: (selectedItem: SupportTicket) => void
 }
 
 const SupportTicketListItem = ({
   item,
-  onItemSelect,
-}: SupportTicketListItemProps) => {
+}: // onItemSelect,
+SupportTicketListItemProps) => {
   return (
     <div className="mx-3 my-2">
       <div className="row">
@@ -29,12 +30,17 @@ const SupportTicketListItem = ({
           </div>
         </div>
         <div className="col align-self-end">
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => onItemSelect(item)}
-          >
-            Open
-          </button>
+          <div className="btn btn-outline-primary">
+            <Link
+              href={{
+                pathname: '/support/tickets',
+                query: { itemId: item._id },
+              }}
+              passHref
+            >
+              <a>Open</a>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
