@@ -36,7 +36,7 @@ const SupportTicketReplyForm = observer(
                 aria-label="With textarea"
                 name="message"
                 id="reply-message-textarea"
-                rows={10}
+                rows={5}
               />
             </div>
           </div>
@@ -48,6 +48,7 @@ const SupportTicketReplyForm = observer(
                 Send
               </button>
             </div>
+            <hr />
           </div>
         </div>
       </form>
