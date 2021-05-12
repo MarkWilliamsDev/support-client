@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { Store } from '../store'
+import { RootStore } from '../store/rootStore'
 
 let store
 
@@ -21,7 +21,7 @@ export function StoreProvider({ children, initialState: initialData }) {
 }
 
 function initializeStore(initialData = null) {
-  const _store = store ?? new Store()
+  const _store = store ?? new RootStore()
 
   if (initialData) {
     _store.hydrate(initialData)

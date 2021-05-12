@@ -7,7 +7,7 @@ function StringDisplay({
   content: string
   label?: string
 }) {
-  return <>{`${label}${content}`}</>
+  return <div style={{ whiteSpace: 'pre-wrap' }}>{`${label}${content}`}</div>
 }
 
 export default StringDisplay

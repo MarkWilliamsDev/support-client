@@ -12,25 +12,26 @@ import SupportTicketReplyForm from '../../src/components/forms/specificForms/Sup
 import { useStore } from '../../src/StoreProvider'
 
 function tickets() {
-  const [selectedItem, setSelectedItem] = useState<SupportTicket>(undefined)
-
   const router = useRouter()
 
   const { itemId } = router.query
 
-  const store = useStore()
+  const { uiStore, supportTicketsStore } = useStore()
 
   useEffect(() => {
-    store.fetchAll()
-  }, [store])
+    uiStore.setIsPending()
+    supportTicketsStore.fetchAll()
+  }, [supportTicketsStore])
+
+  const selectedItem = supportTicketsStore.supportTicket
+
+  console.log(uiStore.pending)
 
   useEffect(() => {
-    if (store.pending) return
+    if (uiStore.pending) return
 
-    const list = toJS(store.supportTickets)
-
-    setSelectedItem(list.filter((item) => item._id === itemId)[0])
-  }, [itemId, store.supportTickets, store.pending])
+    supportTicketsStore.setSupportTicket(itemId)
+  }, [itemId, supportTicketsStore.supportTickets, uiStore.pending])
 
   const renderTicket = () => {
     return (
@@ -46,7 +47,7 @@ function tickets() {
   const renderListContainer = () => {
     return (
       <ListContainer
-        list={store.supportTickets}
+        list={supportTicketsStore.supportTickets}
         ItemComponent={SupportTicketListItem}
       />
     )

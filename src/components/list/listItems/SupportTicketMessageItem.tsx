@@ -9,8 +9,8 @@ function SupportTicketMessageItem({ item }: { item: SupportTicketMessage }) {
       <div className="col-11">
         <div className="row border mt-2">
           <div className="col">
-            <div className="row justify-content-between bg-light py-1 px-2">
-              <div className="col-4">
+            <div className="row bg-light py-1 px-2">
+              <div className="col-2">
                 <h6 className="me-4">
                   <StringDisplay label={'From: '} content={item.from} />
                 </h6>

@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app'
 import 'bootstrap/dist/css/bootstrap.css'
 import { StoreProvider } from '../src/StoreProvider'
+import AppSpinner from '../src/components/ui/AppSpinner'
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -14,6 +15,7 @@ function App({ Component, pageProps }: AppProps) {
         <div className="border p-2">
           <Component {...pageProps} />
         </div>
+        <AppSpinner />
       </div>
     </StoreProvider>
   )
