@@ -11,6 +11,7 @@ import SupportTicketMessageItem from '../../list/listItems/SupportTicketMessageI
 import ItemDisplayToolbar from '../../ui/toolbars/ItemDisplayToolbar'
 import DateDisplay from '../elements/DateDisplay'
 import StringDisplay from '../elements/StringDisplay'
+import SelectInput from '../../forms/elements/SelectInput'
 
 const statusOptions = ['active', 'closed']
 
@@ -20,7 +21,6 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
 
   const renderMessages = () => {
     const reversedList = item?.messages?.slice().reverse()
-
     return (
       <ListContainer
         list={reversedList}
@@ -28,9 +28,9 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
       />
     )
   }
+
   const renderToolbar = () => {
     const label = showForm ? 'Hide Form' : 'Reply'
-
     return (
       <ItemDisplayToolbar>
         <button
@@ -51,12 +51,6 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
     )
   }
 
-  const [selectedStatus, setSelectedStatus] = useState('')
-
-  useEffect(() => {
-    setSelectedStatus(item?.ticketStatus)
-  }, [item])
-
   const statusChangeHandler = (e) => {
     uiStore.setIsPending()
 
@@ -72,23 +66,11 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
 
   const renderStatusSelect = () => {
     return (
-      <div className="input-group">
-        <label className="input-group-text" htmlFor="statusOptionSelect">
-          {'Status:'}
-        </label>
-        <select
-          className="form-select"
-          id="statusOptionSelect"
-          value={selectedStatus}
-          onChange={statusChangeHandler}
-        >
-          {statusOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </div>
+      <SelectInput
+        onChange={statusChangeHandler}
+        options={statusOptions}
+        currentOption={item?.ticketStatus}
+      />
     )
   }
 
