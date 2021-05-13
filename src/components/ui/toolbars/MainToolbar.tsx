@@ -1,11 +1,13 @@
 import LinkButton from '../buttons/LinkButton'
 
 function MainToolbar() {
-  return (
-    <div className="nav-bar">
+  const renderViewAllTicketsButton = () => {
+    return (
       <LinkButton pathname={'/support/tickets'} label={'View All Tickets'} />
-    </div>
-  )
+    )
+  }
+
+  return <div className="nav-bar">{renderViewAllTicketsButton()}</div>
 }
 
 export default MainToolbar
