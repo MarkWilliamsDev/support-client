@@ -1,5 +1,9 @@
 import { SupportTicket } from 'apiTypes'
-import { useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
+import { useEffect, useState } from 'react'
+
+import { useStore } from '../../../StoreProvider'
 import FormContainer from '../../forms/FormContainer'
 import SupportTicketReplyForm from '../../forms/specificForms/SupportTicketReplyForm'
 import ListContainer from '../../list/ListContainer'
@@ -8,13 +12,17 @@ import ItemDisplayToolbar from '../../ui/toolbars/ItemDisplayToolbar'
 import DateDisplay from '../elements/DateDisplay'
 import StringDisplay from '../elements/StringDisplay'
 
+const statusOptions = ['active', 'closed']
+
 function SupportTicketDisplay({ item }: { item: SupportTicket }) {
   const [showForm, setShowForm] = useState(false)
 
   const renderMessages = () => {
+    const reversedList = item?.messages?.slice().reverse()
+
     return (
       <ListContainer
-        list={item?.messages?.reverse()}
+        list={reversedList}
         ItemComponent={SupportTicketMessageItem}
       />
     )
@@ -37,8 +45,51 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
   const renderForm = () => {
     return (
       <FormContainer>
-        <SupportTicketReplyForm itemId={item?._id} />
+        <SupportTicketReplyForm itemId={item?._id} setShowForm={setShowForm} />
       </FormContainer>
+    )
+  }
+
+  const { supportTicketsStore, uiStore } = useStore()
+
+  const [selectedStatus, setSelectedStatus] = useState('')
+
+  useEffect(() => {
+    setSelectedStatus(item.ticketStatus)
+  }, [item])
+
+  const statusChangeHandler = (e) => {
+    uiStore.setIsPending()
+
+    const currentSupportTicket = toJS(supportTicketsStore.supportTicket)
+
+    const newSupportTicket = {
+      ...currentSupportTicket,
+      ticketStatus: e.target.value,
+    }
+
+    supportTicketsStore.updateTicket(newSupportTicket)
+  }
+
+  const renderStatusSelect = () => {
+    return (
+      <div className="input-group">
+        <label className="input-group-text" htmlFor="statusOptionSelect">
+          {'Status:'}
+        </label>
+        <select
+          className="form-select"
+          id="statusOptionSelect"
+          value={selectedStatus}
+          onChange={statusChangeHandler}
+        >
+          {statusOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
     )
   }
 
@@ -53,19 +104,17 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
             <div>
               <StringDisplay label={'Subject: '} content={item?.subject} />
             </div>
-            <div>
-              <StringDisplay label={'Status: '} content={item?.ticketStatus} />
-            </div>
+            {renderStatusSelect()}
           </div>
           <div className="col">
             <div>
               <DateDisplay date={item?.createdAt} />
             </div>
             <div>
-              <StringDisplay label={'Ticket ID: '} content={item?._id} />
+              <StringDisplay label={'User ID: '} content={item?._user} />
             </div>
             <div>
-              <StringDisplay label={'User ID: '} content={item?._user} />
+              <StringDisplay label={'Ticket ID: '} content={item?._id} />
             </div>
           </div>
         </div>
@@ -79,4 +128,4 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
   )
 }
 
-export default SupportTicketDisplay
+export default observer(SupportTicketDisplay)

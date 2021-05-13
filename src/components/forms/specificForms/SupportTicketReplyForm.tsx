@@ -5,6 +5,7 @@ import { useStore } from '../../../StoreProvider'
 
 type SupportTicketReplyFormProps = {
   itemId: string
+  setShowForm: (input: boolean) => void
 }
 
 type FormValues = {
@@ -12,7 +13,7 @@ type FormValues = {
 }
 
 const SupportTicketReplyForm = observer(
-  ({ itemId }: SupportTicketReplyFormProps) => {
+  ({ itemId, setShowForm }: SupportTicketReplyFormProps) => {
     const { register, handleSubmit } = useForm()
     const { uiStore, supportTicketsStore } = useStore()
 
@@ -22,10 +23,11 @@ const SupportTicketReplyForm = observer(
       if (inputValues.message === '') return
 
       uiStore.setIsPending()
-      supportTicketsStore.addSubItem({ ...inputValues, itemId })
+      supportTicketsStore.addMessage({ ...inputValues, itemId })
 
       const formElement = document.getElementById(formId) as HTMLFormElement
       formElement.reset()
+      setShowForm(false)
     }
 
     return (

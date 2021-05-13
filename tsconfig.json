@@ -20,7 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     "models/supportTicket.js",
-    "pages/api/support/tickets.js"
+    "pages/api/support/tickets/index.js",
+    "pages/api/support/tickets/messages.js"
   ],
   "exclude": ["node_modules"]
 }

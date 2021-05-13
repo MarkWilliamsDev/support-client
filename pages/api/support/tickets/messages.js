@@ -1,14 +1,8 @@
-import connectDB from '../../../middleware/mongodb'
-import SupportTicket from '../../../models/supportTicket'
+import connectDB from '../../../../middleware/mongodb'
+import SupportTicket from '../../../../models/supportTicket'
 
-export const supportTicketRouteHandler = async (req, res) => {
+export const supportTicketMessagesRouteHandler = async (req, res) => {
   switch (req.method) {
-    case 'GET':
-      const supportTickets = await SupportTicket.find()
-
-      res.send(supportTickets)
-      break
-
     case 'PUT':
       try {
         const { itemId, message } = req.body
@@ -27,7 +21,7 @@ export const supportTicketRouteHandler = async (req, res) => {
 
         await supportTicket.save()
 
-        res.status(200).send(supportTicket)
+        res.send(supportTicket)
       } catch (error) {
         console.log(error)
       }
@@ -37,4 +31,4 @@ export const supportTicketRouteHandler = async (req, res) => {
   }
 }
 
-export default connectDB(supportTicketRouteHandler)
+export default connectDB(supportTicketMessagesRouteHandler)

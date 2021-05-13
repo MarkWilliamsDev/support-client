@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
+import { toJS } from 'mobx'
 
 import ListContainer from '../../src/components/list/ListContainer'
 import SupportTicketListItem from '../../src/components/list/listItems/SupportTicketListItem'

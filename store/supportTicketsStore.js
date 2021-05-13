@@ -7,6 +7,7 @@ enableStaticRendering(typeof window === 'undefined')
 export class SupportTicketsStore {
   supportTickets = []
   supportTicket = {}
+  supportTicketIndex = 0
 
   constructor(rootStore) {
     makeAutoObservable(this)
@@ -23,24 +24,39 @@ export class SupportTicketsStore {
   }
 
   setSupportTicket(itemId) {
-    this.supportTicket = this.supportTickets.filter(
+    const supportTicketIndex = this.supportTickets.findIndex(
       (item) => item._id === itemId
-    )[0]
+    )
+
+    this.supportTicket = this.supportTickets[supportTicketIndex]
+
+    this.supportTicketIndex = supportTicketIndex
   }
 
-  async addSubItem(inputValues) {
-    const res = await axios.put('/api/support/tickets', inputValues)
+  async updateTicket(inputValues) {
+    const res = await axios.post('/api/support/tickets', inputValues)
+
+    const updatedItem = res
+
+    runInAction(() => {
+      const supportTickets = this.supportTickets
+
+      supportTickets[this.supportTicketIndex] = updatedItem
+
+      this.supportTickets = supportTickets
+      this.rootStore.uiStore.setNotPending()
+    })
+  }
+
+  async addMessage(inputValues) {
+    const res = await axios.put('/api/support/tickets/messages', inputValues)
 
     const updatedItem = res.data
 
     runInAction(() => {
       const supportTickets = this.supportTickets
 
-      const index = supportTickets.findIndex(
-        (item) => item._id === updatedItem._id
-      )
-
-      supportTickets[index] = updatedItem
+      supportTickets[this.supportTicketIndex] = updatedItem
 
       this.supportTickets = supportTickets
       this.rootStore.uiStore.setNotPending()
