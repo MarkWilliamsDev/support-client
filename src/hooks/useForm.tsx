@@ -1,19 +1,15 @@
-import { ChangeEvent, useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 function useForm() {
   const [formValues, setFormValues] = useState({})
 
-  const formChangeHandler = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const formChange = (e: FormEvent<HTMLInputElement>) => {
     e.persist()
 
-    const { name, value } = e.target
-
-    setFormValues((values) => ({ ...values, [name]: value }))
+    setFormValues((values) => ({ ...values, [e.target.name]: e.target.value }))
   }
 
-  return [formChangeHandler, formValues] as const
+  return [formChange, formValues] as const
 }
 
 export default useForm

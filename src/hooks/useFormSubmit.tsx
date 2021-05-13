@@ -1,13 +1,7 @@
-import { FormEvent } from 'react'
-
 const useFormSubmit = (inputValues, formId: string, store) => {
   const { uiStore, supportTicketsStore } = store
 
-  const formSubmitHandler = (e: FormEvent) => {
-    e.preventDefault()
-
-    if (inputValues.message === undefined) return
-
+  const formSubmitHandler = () => {
     uiStore.setIsPending()
     supportTicketsStore.addSubItem(inputValues)
 

@@ -1,40 +1,43 @@
-import { Observer, observer } from 'mobx-react-lite'
-import useForm from '../../../hooks/useForm'
-import useFormSubmit from '../../../hooks/useFormSubmit'
+import { observer } from 'mobx-react-lite'
+import { SubmitHandler, useForm } from 'react-hook-form'
+
 import { useStore } from '../../../StoreProvider'
 
 type SupportTicketReplyFormProps = {
   itemId: string
 }
 
+type FormValues = {
+  message: string
+}
+
 const SupportTicketReplyForm = observer(
   ({ itemId }: SupportTicketReplyFormProps) => {
-    const [formChangeHandler, formValues] = useForm()
-
-    const store = useStore()
+    const { register, handleSubmit } = useForm()
+    const { uiStore, supportTicketsStore } = useStore()
 
     const formId = 'SupportTicketReplyForm'
 
-    const formSubmitHandler = useFormSubmit(
-      { ...formValues, itemId },
-      formId,
-      store
-    )
+    const onSubmitHandler: SubmitHandler<FormValues> = (inputValues) => {
+      if (inputValues.message === '') return
+
+      uiStore.setIsPending()
+      supportTicketsStore.addSubItem({ ...inputValues, itemId })
+
+      const formElement = document.getElementById(formId) as HTMLFormElement
+      formElement.reset()
+    }
 
     return (
-      <form
-        id={formId}
-        onChange={(e) => formChangeHandler(e)}
-        onSubmit={(e) => formSubmitHandler(e)}
-      >
+      <form id={formId} onSubmit={handleSubmit(onSubmitHandler)}>
         <div className="row">
           <div className="col-100">
             <hr />
             <div className="input-group">
               <textarea
+                {...register('message')}
                 className="form-control"
                 aria-label="With textarea"
-                name="message"
                 id="reply-message-textarea"
                 rows={5}
               />
