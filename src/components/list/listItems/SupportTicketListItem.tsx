@@ -1,7 +1,7 @@
 import { SupportTicket } from 'apiTypes'
-import Link from 'next/link'
 import DateDisplay from '../../display/elements/DateDisplay'
 import StringDisplay from '../../display/elements/StringDisplay'
+import LinkButton from '../../ui/buttons/LinkButton'
 
 type SupportTicketListItemProps = {
   item: SupportTicket
@@ -30,17 +30,11 @@ SupportTicketListItemProps) => {
           </div>
         </div>
         <div className="col align-self-end">
-          <div className="btn btn-outline-primary">
-            <Link
-              href={{
-                pathname: '/support/tickets',
-                query: { itemId: item._id },
-              }}
-              passHref
-            >
-              <a>Open</a>
-            </Link>
-          </div>
+          <LinkButton
+            pathname={'/support/tickets'}
+            query={{ itemId: item._id }}
+            label={'Open'}
+          />
         </div>
       </div>
     </div>

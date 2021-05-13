@@ -1,15 +1,26 @@
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type LinkButtonProps = {
   pathname: string
+  query?: {}
   label: string
 }
 
-function LinkButton({ pathname, label }: LinkButtonProps) {
+function LinkButton({ pathname, query, label }: LinkButtonProps) {
+  const router = useRouter()
+
+  const onClickHandler = () => {
+    router.push({ pathname, query })
+  }
+
   return (
-    <Link href={pathname}>
-      <div>{label}</div>
-    </Link>
+    <button
+      type="button"
+      onClick={onClickHandler}
+      className="btn btn-outline-primary"
+    >
+      {label}
+    </button>
   )
 }
 

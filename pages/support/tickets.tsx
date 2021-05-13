@@ -23,7 +23,6 @@ function tickets() {
 
   useEffect(() => {
     if (uiStore.pending) return
-
     supportTicketsStore.setSupportTicket(itemId)
   }, [itemId, supportTickets, uiStore.pending])
 

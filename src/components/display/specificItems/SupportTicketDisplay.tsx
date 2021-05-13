@@ -15,6 +15,7 @@ import StringDisplay from '../elements/StringDisplay'
 const statusOptions = ['active', 'closed']
 
 function SupportTicketDisplay({ item }: { item: SupportTicket }) {
+  const { supportTicketsStore, uiStore } = useStore()
   const [showForm, setShowForm] = useState(false)
 
   const renderMessages = () => {
@@ -50,12 +51,10 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
     )
   }
 
-  const { supportTicketsStore, uiStore } = useStore()
-
   const [selectedStatus, setSelectedStatus] = useState('')
 
   useEffect(() => {
-    setSelectedStatus(item.ticketStatus)
+    setSelectedStatus(item?.ticketStatus)
   }, [item])
 
   const statusChangeHandler = (e) => {

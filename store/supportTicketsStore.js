@@ -36,7 +36,7 @@ export class SupportTicketsStore {
   async updateTicket(inputValues) {
     const res = await axios.post('/api/support/tickets', inputValues)
 
-    const updatedItem = res
+    const updatedItem = res.data
 
     runInAction(() => {
       const supportTickets = this.supportTickets
