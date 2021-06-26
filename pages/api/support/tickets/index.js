@@ -9,11 +9,11 @@ export const supportTicketsRouteHandler = async (req, res) => {
       res.send(supportTickets)
       break
     case 'POST':
-      const newTicket = req.body
+      const updatedTicket = req.body
 
-      const supportTicket = await SupportTicket.findById(newTicket._id)
+      const supportTicket = await SupportTicket.findById(updatedTicket._id)
 
-      supportTicket.overwrite(newTicket)
+      supportTicket.overwrite(updatedTicket)
 
       await supportTicket.save()
 

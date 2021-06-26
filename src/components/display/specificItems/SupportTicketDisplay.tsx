@@ -1,7 +1,7 @@
 import { SupportTicket } from 'apiTypes'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useStore } from '../../../StoreProvider'
 import FormContainer from '../../forms/FormContainer'
@@ -56,12 +56,12 @@ function SupportTicketDisplay({ item }: { item: SupportTicket }) {
 
     const currentSupportTicket = toJS(supportTicketsStore.supportTicket)
 
-    const newSupportTicket = {
+    const updatedSupportTicket = {
       ...currentSupportTicket,
       ticketStatus: e.target.value,
     }
 
-    supportTicketsStore.updateTicket(newSupportTicket)
+    supportTicketsStore.updateTicket(updatedSupportTicket)
   }
 
   const renderStatusSelect = () => {

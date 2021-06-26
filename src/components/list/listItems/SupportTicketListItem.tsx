@@ -37,6 +37,7 @@ SupportTicketListItemProps) => {
           />
         </div>
       </div>
+      <hr />
     </div>
   )
 }

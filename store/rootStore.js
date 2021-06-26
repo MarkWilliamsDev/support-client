@@ -6,8 +6,6 @@ import { SupportTicketsStore } from './supportTicketsStore'
 enableStaticRendering(typeof window === 'undefined')
 
 export class RootStore {
-  supportTickets = []
-  supportTicket = {}
   lastUpdate = 0
 
   constructor() {
