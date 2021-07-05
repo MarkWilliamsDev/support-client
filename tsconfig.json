@@ -20,7 +20,8 @@
       "@/store/*": ["store/*"],
       "@/components/*": ["src/components/*"],
       "@/models/*": ["models/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/config/*": ["config/*"]
     }
   },
   "include": [
