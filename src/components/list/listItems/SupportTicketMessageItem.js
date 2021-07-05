@@ -1,9 +1,7 @@
-import { SupportTicketMessage } from 'apiTypes'
-import React from 'react'
 import DateDisplay from '../../display/elements/DateDisplay'
 import StringDisplay from '../../display/elements/StringDisplay'
 
-function SupportTicketMessageItem({ item }: { item: SupportTicketMessage }) {
+function SupportTicketMessageItem({ item }) {
   return (
     <div className={`row ${!item.isFromUser && 'justify-content-end'}`}>
       <div className="col-11">

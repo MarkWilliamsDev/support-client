@@ -1,6 +1,4 @@
-import React from 'react'
-
-function DateDisplay({ date }: { date: Date }) {
+function DateDisplay({ date }) {
   const dateString = new Date(date).toUTCString()
 
   return <>{dateString}</>
