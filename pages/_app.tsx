@@ -1,9 +1,9 @@
 import { AppProps } from 'next/app'
 import 'bootstrap/dist/css/bootstrap.css'
 import { StoreProvider } from '../src/StoreProvider'
-import AppSpinner from '../src/components/ui/AppSpinner'
-import MainHeader from '../src/components/headers/MainHeader'
-import MainToolbar from '../src/components/ui/toolbars/MainToolbar'
+import AppSpinner from '@/components/ui/AppSpinner'
+import MainHeader from '@/components/headers/MainHeader'
+import MainToolbar from '@/components/ui/toolbars/MainToolbar'
 
 function App({ Component, pageProps }: AppProps) {
   return (

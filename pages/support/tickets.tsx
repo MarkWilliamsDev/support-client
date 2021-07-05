@@ -2,12 +2,12 @@ import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
-import ListContainer from '../../src/components/list/ListContainer'
-import SupportTicketListItem from '../../src/components/list/listItems/SupportTicketListItem'
-import ItemDisplayContainer from '../../src/components/display/ItemDisplayContainer'
+import ListContainer from '@/components/list/ListContainer'
+import SupportTicketListItem from '@/components/list/listItems/SupportTicketListItem'
+import ItemDisplayContainer from '@/components/display/ItemDisplayContainer'
 import { useStore } from '../../src/StoreProvider'
 
-function tickets() {
+function Tickets() {
   const router = useRouter()
 
   const { itemId } = router.query
@@ -18,12 +18,12 @@ function tickets() {
   useEffect(() => {
     uiStore.setIsPending()
     supportTicketsStore.fetchAll()
-  }, [supportTicketsStore])
+  }, [supportTicketsStore, uiStore])
 
   useEffect(() => {
     if (uiStore.pending) return
     supportTicketsStore.setSupportTicket(itemId)
-  }, [itemId, supportTickets, uiStore.pending])
+  }, [itemId, supportTickets, uiStore.pending, supportTicketsStore])
 
   const renderTicket = () => {
     return <ItemDisplayContainer item={supportTicket} />
@@ -41,4 +41,4 @@ function tickets() {
   return <>{itemId ? renderTicket() : renderListContainer()}</>
 }
 
-export default observer(tickets)
+export default observer(Tickets)

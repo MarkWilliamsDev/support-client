@@ -1,5 +1,5 @@
-import connectDB from '../../../../middleware/mongodb'
-import SupportTicket from '../../../../models/supportTicket'
+import connectDB from '@/utils/middleware/mongodb'
+import SupportTicket from '@/models/supportTicket'
 
 export const supportTicketMessagesRouteHandler = async (req, res) => {
   switch (req.method) {
