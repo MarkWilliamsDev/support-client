@@ -1,16 +1,20 @@
 import mongoose from 'mongoose'
+import APP_MODE from '@/config/environment.json'
 
 const connectDB = (handler) => async (req, res) => {
   if (mongoose.connections[0].readyState) {
     return handler(req, res)
   }
 
-  await mongoose.connect(process.env.MONGODB_URI, {
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-    useNewUrlParser: true,
-  })
+  await mongoose.connect(
+    APP_MODE === 'DEV' ? process.env.MONGODB_URI : process.env.MONGODB_URI_LIVE,
+    {
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+      useNewUrlParser: true,
+    }
+  )
 
   return handler(req, res)
 }
