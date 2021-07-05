@@ -1,11 +1,10 @@
-import { AppProps } from 'next/app'
 import 'bootstrap/dist/css/bootstrap.css'
 import { StoreProvider } from '../src/StoreProvider'
 import AppSpinner from '@/components/ui/AppSpinner'
 import MainHeader from '@/components/headers/MainHeader'
 import MainToolbar from '@/components/ui/toolbars/MainToolbar'
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }) {
   return (
     <StoreProvider {...pageProps}>
       <div className="container">

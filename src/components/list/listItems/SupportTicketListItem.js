@@ -1,17 +1,8 @@
-import { SupportTicket } from 'apiTypes'
 import DateDisplay from '../../display/elements/DateDisplay'
 import StringDisplay from '../../display/elements/StringDisplay'
 import LinkButton from '../../ui/buttons/LinkButton'
 
-type SupportTicketListItemProps = {
-  item: SupportTicket
-  // onItemSelect: (selectedItem: SupportTicket) => void
-}
-
-const SupportTicketListItem = ({
-  item,
-}: // onItemSelect,
-SupportTicketListItemProps) => {
+const SupportTicketListItem = ({ item }) => {
   return (
     <div className="mx-3 my-2">
       <div className="row">

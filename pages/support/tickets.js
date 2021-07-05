@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import ListContainer from '@/components/list/ListContainer'
 import SupportTicketListItem from '@/components/list/listItems/SupportTicketListItem'
 import ItemDisplayContainer from '@/components/display/ItemDisplayContainer'
+import SupportTicketDisplay from '@/components/display/specific/SupportTicketDisplay'
 import { useStore } from '../../src/StoreProvider'
 
 function Tickets() {
@@ -26,7 +27,11 @@ function Tickets() {
   }, [itemId, supportTickets, uiStore.pending, supportTicketsStore])
 
   const renderTicket = () => {
-    return <ItemDisplayContainer item={supportTicket} />
+    return (
+      <ItemDisplayContainer>
+        <SupportTicketDisplay item={supportTicket} />
+      </ItemDisplayContainer>
+    )
   }
 
   const renderListContainer = () => {

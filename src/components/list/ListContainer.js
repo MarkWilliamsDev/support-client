@@ -1,12 +1,7 @@
-import { SupportTicket, ListContainerProps } from 'apiTypes'
 import ItemContainer from './listItems/ItemContainer'
 
-function ListContainer({
-  list,
-  ItemComponent,
-  onItemSelect,
-}: ListContainerProps) {
-  const renderItemComponent = (item: SupportTicket) => {
+function ListContainer({ list, ItemComponent, onItemSelect }) {
+  const renderItemComponent = (item) => {
     return <ItemComponent item={item} onItemSelect={onItemSelect} />
   }
 
