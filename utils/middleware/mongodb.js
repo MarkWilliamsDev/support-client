@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
-import APP_MODE from '@/config/environment.json'
+import environment from '@/config/environment.json'
+
+const { APP_MODE } = environment
 
 const connectDB = (handler) => async (req, res) => {
   if (mongoose.connections[0].readyState) {
