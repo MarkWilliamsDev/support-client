@@ -1,1 +1,1 @@
-export default { mode: 'dev' }
+export default { mode: 'dev', test: 'test' }
