@@ -1,6 +1,10 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../../../StoreProvider'
 
+import TextArea from '@/components/forms/elements/TextArea'
+import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
+import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
+
 const SupportTicketReplyForm = ({
   item,
   setShowForm,
@@ -11,7 +15,7 @@ const SupportTicketReplyForm = ({
 
   const formId = 'SupportTicketReplyForm'
 
-  const onSubmitHandler = (inputValues) => {
+  const handleFormSubmit = (inputValues) => {
     if (inputValues.message === '') return
 
     uiStore.setIsPending()
@@ -23,17 +27,16 @@ const SupportTicketReplyForm = ({
   }
 
   return (
-    <form id={formId} onSubmit={handleSubmit(onSubmitHandler)}>
+    <form id={formId} onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="row">
         <div className="col-100">
           <hr />
           <div className="input-group">
-            <textarea
-              {...register('message')}
-              className="form-control"
-              aria-label="With textarea"
-              id="reply-message-textarea"
-              rows={5}
+            <TextArea
+              register={register}
+              name={'message'}
+              ariaLabel="Reply text area"
+              id={'reply-message-textarea'}
             />
           </div>
         </div>
@@ -41,9 +44,12 @@ const SupportTicketReplyForm = ({
       <div className="row">
         <div className="col">
           <div className="mt-2">
-            <button className="btn btn-outline-primary" type="submit">
-              Send
-            </button>
+            <ButtonContainer
+              isOutline
+              variant={'primary'}
+              label={'Send'}
+              Component={ButtonSubmit}
+            />
           </div>
           <hr />
         </div>
