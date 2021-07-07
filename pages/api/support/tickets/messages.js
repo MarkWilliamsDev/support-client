@@ -1,7 +1,7 @@
 import connectDB from '@/utils/middleware/mongodb'
 import SupportTicket from '@/models/supportTicket'
 
-export const supportTicketMessagesRouteHandler = async (req, res) => {
+const handler = async (req, res) => {
   switch (req.method) {
     case 'PUT':
       try {
@@ -31,4 +31,4 @@ export const supportTicketMessagesRouteHandler = async (req, res) => {
   }
 }
 
-export default connectDB(supportTicketMessagesRouteHandler)
+export default connectDB(handler)

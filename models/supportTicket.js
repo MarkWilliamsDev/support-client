@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 const { Schema } = mongoose
 
-import supportMessageSchema from './supportMessage'
+import messageSchema from './message'
 
 const supportTicketSchema = new Schema(
   {
@@ -15,7 +15,7 @@ const supportTicketSchema = new Schema(
       type: String,
     },
     messages: {
-      type: [supportMessageSchema],
+      type: [messageSchema],
     },
     hasNewMessage: {
       type: Boolean,

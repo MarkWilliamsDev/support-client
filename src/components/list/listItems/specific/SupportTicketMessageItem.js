@@ -1,5 +1,5 @@
-import DateDisplay from '../../display/elements/DateDisplay'
-import StringDisplay from '../../display/elements/StringDisplay'
+import DateDisplay from '../../../display/elements/DateDisplay'
+import StringDisplay from '../../../display/elements/StringDisplay'
 
 function SupportTicketMessageItem({ item }) {
   return (

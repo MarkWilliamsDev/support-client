@@ -11,6 +11,13 @@ function MessageToolbar() {
         pathname={'/message/create'}
         label={'Create'}
       />
+      <ButtonContainer
+        Component={LinkButton}
+        variant={'primary'}
+        isOutline
+        pathname={'/message/messages'}
+        label={'All'}
+      />
     </>
   )
 }

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
 import ListContainer from '@/components/list/ListContainer'
-import SupportTicketListItem from '@/components/list/listItems/SupportTicketListItem'
+import SupportTicketListItem from '@/components/list/listItems/specific/SupportTicketListItem'
 import ItemDisplayContainer from '@/components/display/ItemDisplayContainer'
 import SupportTicketDisplay from '@/components/display/specific/SupportTicketDisplay'
 import { useStore } from '../../src/StoreProvider'
