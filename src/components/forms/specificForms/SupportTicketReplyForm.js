@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from '../../../StoreProvider'
 
 const SupportTicketReplyForm = ({
-  itemId,
+  item,
   setShowForm,
   register,
   handleSubmit,
@@ -15,7 +15,7 @@ const SupportTicketReplyForm = ({
     if (inputValues.message === '') return
 
     uiStore.setIsPending()
-    supportTicketsStore.addMessage({ ...inputValues, itemId })
+    supportTicketsStore.addMessage({ ...inputValues, itemId: item?._id })
 
     const formElement = document.getElementById(formId)
     formElement.reset()
