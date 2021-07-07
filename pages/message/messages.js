@@ -5,14 +5,14 @@ import { useStore } from 'src/StoreProvider'
 import ListContainer from '@/components/list/ListContainer'
 import GlobalMessageListItem from '@/components/list/listItems/specific/GlobalMessageListItem'
 
-function messages() {
+function Messages() {
   const { uiStore, globalMessagesStore } = useStore()
   const { globalMessages } = globalMessagesStore
 
   useEffect(() => {
     uiStore.setIsPending()
     globalMessagesStore.fetchAll()
-  }, [uiStore.setIsPending])
+  }, [uiStore, globalMessagesStore])
 
   return (
     <>
@@ -24,4 +24,4 @@ function messages() {
   )
 }
 
-export default observer(messages)
+export default observer(Messages)

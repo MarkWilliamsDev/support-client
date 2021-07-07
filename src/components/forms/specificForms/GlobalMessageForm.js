@@ -7,7 +7,7 @@ import { useStore } from 'src/StoreProvider'
 
 const formId = 'messageForm'
 
-function MessageForm({ register, handleSubmit }) {
+function GlobalMessageForm({ register, handleSubmit }) {
   const { uiStore, globalMessagesStore } = useStore()
 
   const handleFormSubmit = (inputValues) => {
@@ -69,4 +69,4 @@ function MessageForm({ register, handleSubmit }) {
   )
 }
 
-export default MessageForm
+export default GlobalMessageForm

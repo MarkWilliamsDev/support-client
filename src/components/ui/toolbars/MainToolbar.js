@@ -15,7 +15,7 @@ function MainToolbar() {
     <ButtonContainer
       variant={'primary'}
       pathname={'/message'}
-      label={'Messages'}
+      label={'Global Messages'}
       Component={LinkButton}
     />
   )
