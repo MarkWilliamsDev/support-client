@@ -1,7 +1,7 @@
 import connectDB from '@/utils/middleware/mongodb'
 import SupportTicket from '@/models/supportTicket'
 
-export const supportTicketsRouteHandler = async (req, res) => {
+const handler = async (req, res) => {
   switch (req.method) {
     case 'GET':
       const supportTickets = await SupportTicket.find()
@@ -24,4 +24,4 @@ export const supportTicketsRouteHandler = async (req, res) => {
   }
 }
 
-export default connectDB(supportTicketsRouteHandler)
+export default connectDB(handler)

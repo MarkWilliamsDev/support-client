@@ -1,17 +1,9 @@
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 
-const ButtonContainer = dynamic(
-  () => import('@/components/ui/buttons/ButtonContainer'),
-  { ssr: true }
-)
-
-function LinkButton({ pathname, query, label }) {
+function LinkButton({ pathname, query, label, classNames }) {
   return (
     <Link href={{ pathname, query }}>
-      <a>
-        <ButtonContainer>{label}</ButtonContainer>
-      </a>
+      <a className={classNames}>{label}</a>
     </Link>
   )
 }

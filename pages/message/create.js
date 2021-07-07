@@ -1,8 +1,8 @@
 import FormContainer from '@/components/forms/FormContainer'
-import MessageForm from '@/components/forms/specificForms/MessageForm'
+import GlobalMessageForm from '@/components/forms/specificForms/GlobalMessageForm'
 
 function create() {
-  return <FormContainer Component={MessageForm} />
+  return <FormContainer Component={GlobalMessageForm} />
 }
 
 export default create

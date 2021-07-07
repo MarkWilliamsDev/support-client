@@ -1,18 +1,29 @@
+import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 import LinkButton from '@/components/ui/buttons/LinkButton'
 
 function MainToolbar() {
   const renderViewAllTicketsButton = () => (
-    <LinkButton pathname={'/support'} label={'Support'} />
+    <ButtonContainer
+      variant={'primary'}
+      pathname={'/support'}
+      label={'Support'}
+      Component={LinkButton}
+    />
   )
 
   const renderMessagesButton = () => (
-    <LinkButton pathname={'/message'} label={'Messages'} />
+    <ButtonContainer
+      variant={'primary'}
+      pathname={'/message'}
+      label={'Global Messages'}
+      Component={LinkButton}
+    />
   )
 
   return (
-    <div className="nav-bar">
-      {renderViewAllTicketsButton()}
-      {renderMessagesButton()}
+    <div className="row justify-content-start">
+      <div className="col-auto">{renderViewAllTicketsButton()}</div>
+      <div className="col-auto">{renderMessagesButton()}</div>
     </div>
   )
 }
