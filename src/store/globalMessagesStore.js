@@ -6,6 +6,8 @@ enableStaticRendering(typeof window === 'undefined')
 
 export class GlobalMessagesStore {
   globalMessages = []
+  globalMessage = {}
+  globalMessageIndex = null
 
   constructor(rootStore) {
     makeAutoObservable(this)
@@ -19,6 +21,16 @@ export class GlobalMessagesStore {
       this.globalMessages = res.data
       this.rootStore.uiStore.setNotPending()
     })
+  }
+
+  setGlobalMessage(itemId) {
+    const itemIndex = this.globalMessages.findIndex(
+      (item) => item._id === itemId
+    )
+
+    this.globalMessage = this.globalMessages[itemIndex]
+
+    this.globalMessageIndex = itemIndex
   }
 
   async submitMessage(inputValues) {

@@ -8,14 +8,16 @@ function MessageToolbar() {
         Component={LinkButton}
         variant={'primary'}
         isOutline
-        pathname={'/message/create'}
+        pathname={'/global/message'}
+        query={{ pageMode: 'create' }}
         label={'Create'}
       />
       <ButtonContainer
         Component={LinkButton}
         variant={'primary'}
         isOutline
-        pathname={'/message/messages'}
+        pathname={'/global/message'}
+        query={{ pageMode: 'all' }}
         label={'All'}
       />
     </>
