@@ -11,6 +11,7 @@ import GlobalMessageDisplay from '@/components/display/specific/GlobalMessageDis
 import GlobalMessageForm from '@/components/forms/specificForms/GlobalMessageForm'
 import SubToolbarContainer from '@/components/ui/toolbars/subtoolbar/SubToolbarContainer'
 import MessageToolbar from '@/components/ui/toolbars/subtoolbar/MessageToolbar'
+import { pageModes } from '@/config/globalVariables'
 
 function Messages() {
   const { uiStore, globalMessagesStore } = useStore()
@@ -31,7 +32,7 @@ function Messages() {
   }, [itemId, globalMessagesStore.setGlobalMessage, uiStore.pending])
 
   const renderGlobalMessageForm = () => {
-    return pageMode === 'create' ? (
+    return pageMode === pageModes.CREATE ? (
       <FormContainer Component={GlobalMessageForm} />
     ) : (
       <FormContainer Component={GlobalMessageForm} />
@@ -57,13 +58,13 @@ function Messages() {
 
   const renderOnPageMode = () => {
     switch (pageMode) {
-      case 'all':
+      case pageModes.ALL:
         return renderGlobalMessagesList()
-      case 'view':
+      case pageModes.VIEW:
         return renderGlobalMessageDisplay()
-      case 'create':
+      case pageModes.CREATE:
         return renderGlobalMessageForm()
-      case 'edit':
+      case pageModes.EDIT:
         return renderGlobalMessageForm()
       default:
         return 'no components for page to render'
