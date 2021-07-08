@@ -9,6 +9,8 @@ import FormContainer from '@/components/forms/FormContainer'
 import ItemDisplayContainer from '@/components/display/ItemDisplayContainer'
 import GlobalMessageDisplay from '@/components/display/specific/GlobalMessageDisplay'
 import GlobalMessageForm from '@/components/forms/specificForms/GlobalMessageForm'
+import SubToolbarContainer from '@/components/ui/toolbars/subtoolbar/SubToolbarContainer'
+import MessageToolbar from '@/components/ui/toolbars/subtoolbar/MessageToolbar'
 
 function Messages() {
   const { uiStore, globalMessagesStore } = useStore()
@@ -29,7 +31,11 @@ function Messages() {
   }, [itemId, globalMessagesStore.setGlobalMessage, uiStore.pending])
 
   const renderGlobalMessageForm = () => {
-    return <FormContainer Component={GlobalMessageForm} />
+    return pageMode === 'create' ? (
+      <FormContainer Component={GlobalMessageForm} />
+    ) : (
+      <FormContainer Component={GlobalMessageForm} />
+    )
   }
 
   const renderGlobalMessageDisplay = () => {
@@ -49,16 +55,29 @@ function Messages() {
     )
   }
 
-  switch (pageMode) {
-    case 'all':
-      return renderGlobalMessagesList()
-    case 'view':
-      return renderGlobalMessageDisplay()
-    case 'create':
-      return renderGlobalMessageForm()
-    default:
-      return 'no components for page to render'
+  const renderOnPageMode = () => {
+    switch (pageMode) {
+      case 'all':
+        return renderGlobalMessagesList()
+      case 'view':
+        return renderGlobalMessageDisplay()
+      case 'create':
+        return renderGlobalMessageForm()
+      case 'edit':
+        return renderGlobalMessageForm()
+      default:
+        return 'no components for page to render'
+    }
   }
+
+  return (
+    <>
+      <SubToolbarContainer>
+        <MessageToolbar />
+      </SubToolbarContainer>
+      {renderOnPageMode()}
+    </>
+  )
 }
 
 export default observer(Messages)

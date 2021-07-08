@@ -1,8 +1,6 @@
 import StringDisplay from '@/components/display/elements/StringDisplay'
-import { toJS } from 'mobx'
 
 function GlobalMessageListItem({ item }) {
-  console.log(toJS(item))
   return (
     <div>
       <hr />

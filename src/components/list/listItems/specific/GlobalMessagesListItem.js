@@ -1,12 +1,13 @@
 import DateDisplay from '@/components/display/elements/DateDisplay'
 import StringDisplay from '@/components/display/elements/StringDisplay'
 import LinkContainer from '@/components/ui/link/LinkContainer'
+import { pageModes } from '@/config/globalVariables'
 
 function MessageListItem({ item }) {
   return (
     <LinkContainer
       pathname={`/global/message`}
-      query={{ itemId: item._id, pageMode: 'view' }}
+      query={{ itemId: item._id, pageMode: pageModes.VIEW }}
     >
       <div className="border mb-1">
         <div className="px-2 py-1">

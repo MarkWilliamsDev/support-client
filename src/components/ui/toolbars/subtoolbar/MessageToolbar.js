@@ -1,5 +1,6 @@
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 import LinkButton from '@/components/ui/buttons/LinkButton'
+import { pageModes } from '@/config/globalVariables'
 
 function MessageToolbar() {
   return (
@@ -9,7 +10,7 @@ function MessageToolbar() {
         variant={'primary'}
         isOutline
         pathname={'/global/message'}
-        query={{ pageMode: 'create' }}
+        query={{ pageMode: pageModes.CREATE }}
         label={'Create'}
       />
       <ButtonContainer
@@ -17,7 +18,7 @@ function MessageToolbar() {
         variant={'primary'}
         isOutline
         pathname={'/global/message'}
-        query={{ pageMode: 'all' }}
+        query={{ pageMode: pageModes.ALL }}
         label={'All'}
       />
     </>

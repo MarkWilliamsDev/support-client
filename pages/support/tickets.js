@@ -6,6 +6,8 @@ import ListContainer from '@/components/list/ListContainer'
 import SupportTicketListItem from '@/components/list/listItems/specific/SupportTicketListItem'
 import ItemDisplayContainer from '@/components/display/ItemDisplayContainer'
 import SupportTicketDisplay from '@/components/display/specific/SupportTicketDisplay'
+import SubToolbarContainer from '@/components/ui/toolbars/subtoolbar/SubToolbarContainer'
+import SupportToolbar from '@/components/ui/toolbars/subtoolbar/SupportToolbar'
 import { useStore } from '../../src/StoreProvider'
 
 function Tickets() {
@@ -43,7 +45,14 @@ function Tickets() {
     )
   }
 
-  return <>{itemId ? renderTicket() : renderListContainer()}</>
+  return (
+    <>
+      <SubToolbarContainer>
+        <SupportToolbar />
+      </SubToolbarContainer>
+      {itemId ? renderTicket() : renderListContainer()}
+    </>
+  )
 }
 
 export default observer(Tickets)
