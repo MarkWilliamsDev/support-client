@@ -44,7 +44,8 @@ export class GlobalMessagesStore {
 
     runInAction(() => {
       const globalMessages = this.globalMessages
-      this.globalMessages = globalMessages.push(newItem)
+      globalMessages.push(newItem)
+      this.globalMessages = globalMessages
 
       this.rootStore.uiStore.setNotPending()
     })

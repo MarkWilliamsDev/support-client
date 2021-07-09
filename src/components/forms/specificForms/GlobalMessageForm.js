@@ -1,5 +1,7 @@
 import TextArea from '@/components/forms/elements/TextArea'
 import TextInput from '@/components/forms/elements/TextInput'
+import ListContainer from '@/components/list/ListContainer'
+import GlobalMessageListItem from '@/components/list/listItems/specific/GlobalMessageListItem'
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
 import { pageModes } from '@/config/globalVariables'
@@ -39,7 +41,7 @@ function GlobalMessageForm({
 
           router.push({
             pathname: '/global/message',
-            query: { itemId: item._id, pageMode: pageModes.ALL },
+            query: { pageMode: pageModes.ALL },
           })
         }
         break
@@ -61,6 +63,15 @@ function GlobalMessageForm({
       default:
         break
     }
+  }
+
+  const renderMessagesListContainer = () => {
+    return (
+      <ListContainer
+        ItemComponent={GlobalMessageListItem}
+        list={item.messages}
+      />
+    )
   }
 
   return (
@@ -89,7 +100,7 @@ function GlobalMessageForm({
       </div>
       <div className="row">
         <div className="col">
-          {pageModes === pageModes.CREATE && (
+          {pageMode === pageModes.CREATE ? (
             <TextArea
               label={'Message'}
               register={register}
@@ -97,6 +108,8 @@ function GlobalMessageForm({
               id={'messageTextAreaInput'}
               ariaLabel={'Message Body'}
             />
+          ) : (
+            renderMessagesListContainer()
           )}
         </div>
       </div>
