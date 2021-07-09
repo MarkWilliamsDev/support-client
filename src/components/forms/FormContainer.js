@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form'
 
 function FormContainer({ Component, item, setShowForm, pageMode }) {
-  const { register, handleSubmit, setValue, watch } = useForm()
-  console.log(watch())
+  const { register, handleSubmit, setValue } = useForm()
 
   return (
     <Component

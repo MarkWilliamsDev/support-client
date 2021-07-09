@@ -23,24 +23,33 @@ const handler = async (req, res) => {
         break
       case 'edit':
         try {
-          const currentItem = await GlobalMessage.findById(_id)
+          GlobalMessage.findByIdAndUpdate(
+            _id,
+            {
+              ...rest,
+              createdAt,
+            },
+            { new: true },
+            async (err, doc) => {
+              if (err) {
+                return handleApiError(err)
+              }
 
-          const newArray = currentItem.messages.map(
-            ({ _id, createdAt }, index) => {
-              return { _id, message: message[index], createdAt }
+              const newMessagesArray = doc.messages.map(
+                ({ _id, createdAt }, index) => {
+                  return { _id, message: message[index], createdAt }
+                }
+              )
+
+              doc.messages = newMessagesArray
+
+              await doc.save()
+
+              console.log(doc)
+
+              res.send(doc)
             }
           )
-
-          await currentItem.update({
-            ...rest,
-            createdAt,
-          })
-
-          currentItem.messages = newArray
-
-          await currentItem.save()
-
-          res.send(currentItem)
         } catch (error) {
           handleApiError('GlobalMessage Edit Error', error)
         }
