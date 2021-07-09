@@ -22,37 +22,33 @@ const handler = async (req, res) => {
         }
         break
       case 'edit':
-        try {
-          GlobalMessage.findByIdAndUpdate(
-            _id,
-            {
-              ...rest,
-              createdAt,
-            },
-            { new: true },
-            async (err, doc) => {
-              if (err) {
-                return handleApiError(err)
-              }
-
-              const newMessagesArray = doc.messages.map(
-                ({ _id, createdAt }, index) => {
-                  return { _id, message: message[index], createdAt }
-                }
-              )
-
-              doc.messages = newMessagesArray
-
-              await doc.save()
-
-              console.log(doc)
-
-              res.send(doc)
+        GlobalMessage.findByIdAndUpdate(
+          _id,
+          {
+            ...rest,
+            createdAt,
+          },
+          { new: true },
+          async (err, doc) => {
+            if (err) {
+              return handleApiError(err)
             }
-          )
-        } catch (error) {
-          handleApiError('GlobalMessage Edit Error', error)
-        }
+
+            const newMessagesArray = doc.messages.map(
+              ({ _id, createdAt }, index) => {
+                return { _id, message: message[index], createdAt }
+              }
+            )
+
+            doc.messages = newMessagesArray
+
+            await doc.save()
+
+            console.log(doc)
+
+            res.send(doc)
+          }
+        )
         break
       default:
         break
