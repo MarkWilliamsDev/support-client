@@ -12,7 +12,6 @@ import GlobalMessageForm from '@/components/forms/specificForms/GlobalMessageFor
 import SubToolbarContainer from '@/components/ui/toolbars/subtoolbar/SubToolbarContainer'
 import MessageToolbar from '@/components/ui/toolbars/subtoolbar/MessageToolbar'
 import { pageModes } from '@/config/globalVariables'
-import { toJS } from 'mobx'
 
 function Message() {
   const { uiStore, globalMessagesStore } = useStore()

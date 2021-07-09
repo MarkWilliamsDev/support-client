@@ -6,8 +6,8 @@ function ListContainer({ list, ItemComponent, onItemSelect }) {
   }
 
   const renderList = () => {
-    if (list.length) {
-      return list.map((item) => {
+    if (list?.length) {
+      return list?.map((item) => {
         return (
           <ItemContainer key={item._id}>
             {renderItemComponent(item)}

@@ -1,13 +1,14 @@
 import TextArea from '@/components/forms/elements/TextArea'
 import TextInput from '@/components/forms/elements/TextInput'
-import ListContainer from '@/components/list/ListContainer'
-import GlobalMessageListItem from '@/components/list/listItems/specific/GlobalMessageListItem'
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
+import StringDisplay from '@/components/display/elements/StringDisplay'
 import { pageModes } from '@/config/globalVariables'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useStore } from 'src/StoreProvider'
+import DateDisplay from '@/components/display/elements/DateDisplay'
+import { toJS } from 'mobx'
 
 const formId = 'messageForm'
 
@@ -65,13 +66,23 @@ function GlobalMessageForm({
     }
   }
 
-  const renderMessagesListContainer = () => {
-    return (
-      <ListContainer
-        ItemComponent={GlobalMessageListItem}
-        list={item.messages}
-      />
-    )
+  const renderMessagesEditList = () => {
+    return item?.messages?.map((message, index) => {
+      return (
+        <div key={message._id}>
+          <hr />
+          <DateDisplay date={message.createdAt} />
+          <StringDisplay content={message._id} />
+          <TextArea
+            id={`message${index}Input`}
+            index={index}
+            defaultValue={message.message}
+            register={register}
+            name={`message.${index}`}
+          />
+        </div>
+      )
+    })
   }
 
   return (
@@ -109,7 +120,7 @@ function GlobalMessageForm({
               ariaLabel={'Message Body'}
             />
           ) : (
-            renderMessagesListContainer()
+            renderMessagesEditList()
           )}
         </div>
       </div>

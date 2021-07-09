@@ -24,7 +24,20 @@ const handler = async (req, res) => {
       case 'edit':
         try {
           const currentItem = await GlobalMessage.findById(_id)
-          currentItem.overwrite({ ...rest, createdAt })
+
+          const newArray = currentItem.messages.map(
+            ({ _id, createdAt }, index) => {
+              return { _id, message: message[index], createdAt }
+            }
+          )
+
+          await currentItem.update({
+            ...rest,
+            createdAt,
+          })
+
+          currentItem.messages = newArray
+
           await currentItem.save()
 
           res.send(currentItem)
