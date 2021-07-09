@@ -13,7 +13,7 @@ import SubToolbarContainer from '@/components/ui/toolbars/subtoolbar/SubToolbarC
 import MessageToolbar from '@/components/ui/toolbars/subtoolbar/MessageToolbar'
 import { pageModes } from '@/config/globalVariables'
 
-function Messages() {
+function Message() {
   const { uiStore, globalMessagesStore } = useStore()
   const { globalMessage, globalMessages } = globalMessagesStore
 
@@ -26,16 +26,24 @@ function Messages() {
   }, [uiStore, globalMessagesStore])
 
   useEffect(() => {
-    if (uiStore.pending) return
-    if (!itemId) return
+    if (pageMode !== pageModes.CREATE) return
+    globalMessagesStore.clearGlobalMessage()
+  }, [pageMode])
+
+  useEffect(() => {
+    if (uiStore.pending || !itemId) return
     globalMessagesStore.setGlobalMessage(itemId)
   }, [itemId, globalMessagesStore.setGlobalMessage, uiStore.pending])
 
   const renderGlobalMessageForm = () => {
     return pageMode === pageModes.CREATE ? (
-      <FormContainer Component={GlobalMessageForm} />
+      <FormContainer Component={GlobalMessageForm} pageMode={pageMode} />
     ) : (
-      <FormContainer Component={GlobalMessageForm} />
+      <FormContainer
+        Component={GlobalMessageForm}
+        item={globalMessage}
+        pageMode={pageMode}
+      />
     )
   }
 
@@ -81,4 +89,4 @@ function Messages() {
   )
 }
 
-export default observer(Messages)
+export default observer(Message)

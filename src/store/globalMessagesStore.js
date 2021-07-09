@@ -33,14 +33,35 @@ export class GlobalMessagesStore {
     this.globalMessageIndex = itemIndex
   }
 
-  async submitMessage(inputValues) {
-    const res = await axios.post('/api/global/messages', inputValues)
+  clearGlobalMessage() {
+    this.globalMessage = {}
+  }
+
+  async submitMessage(valuesToSubmit) {
+    const res = await axios.post('/api/global/messages/create', valuesToSubmit)
 
     const newItem = res.data
 
     runInAction(() => {
       const globalMessages = this.globalMessages
       this.globalMessages = globalMessages.push(newItem)
+
+      this.rootStore.uiStore.setNotPending()
+    })
+  }
+
+  async editMessage(valuesToSubmit) {
+    const res = await axios.post('/api/global/messages/edit', valuesToSubmit)
+
+    const savedItem = res.data
+    runInAction(() => {
+      const globalMessages = this.globalMessages
+
+      const index = this.globalMessageIndex
+
+      globalMessages[index] = savedItem
+
+      this.globalMessages = globalMessages
 
       this.rootStore.uiStore.setNotPending()
     })
