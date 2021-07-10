@@ -1,3 +1,4 @@
+import { backendActions } from '@/config/globalVariables'
 import GlobalMessage from '@/models/globalMessage'
 import { handleApiError } from '@/utils/helpers/handleApiError'
 import connectDB from '@/utils/middleware/mongodb'
@@ -7,7 +8,7 @@ const handler = async (req, res) => {
     const { message, _id, createdAt, ...rest } = req.body
 
     switch (req.query.action) {
-      case 'create':
+      case backendActions.CREATE:
         try {
           const newMessage = new GlobalMessage({
             ...rest,
@@ -18,37 +19,56 @@ const handler = async (req, res) => {
 
           res.send(newMessage)
         } catch (error) {
-          handleApiError('GlobalMessage Create Error', error)
+          handleApiError(res, 'GlobalMessage Create Error', error)
         }
         break
-      case 'edit':
-        GlobalMessage.findByIdAndUpdate(
-          _id,
-          {
-            ...rest,
-            createdAt,
-          },
-          { new: true },
-          async (err, doc) => {
+      case backendActions.EDIT:
+        {
+          GlobalMessage.findByIdAndUpdate(
+            _id,
+            {
+              ...rest,
+              createdAt,
+            },
+            { new: true },
+            async (err, doc) => {
+              if (err) {
+                return handleApiError(res, 'GlobalMessage Edit Error', err)
+              }
+
+              const newMessagesArray = doc.messages.map(
+                ({ _id, createdAt }, index) => {
+                  return { _id, message: message[index], createdAt }
+                }
+              )
+
+              doc.messages = newMessagesArray
+
+              await doc.save()
+
+              res.send(doc)
+            }
+          )
+        }
+        break
+      case backendActions.ADD:
+        {
+          GlobalMessage.findById(_id, async (err, doc) => {
             if (err) {
-              return handleApiError(err)
+              return handleApiError(res, 'GlobalMessage Add Error', err)
             }
 
-            const newMessagesArray = doc.messages.map(
-              ({ _id, createdAt }, index) => {
-                return { _id, message: message[index], createdAt }
-              }
-            )
+            const newMessage = { ...message, createdAt: new Date() }
 
-            doc.messages = newMessagesArray
-
-            await doc.save()
+            doc.messages.push(newMessage)
 
             console.log(doc)
 
+            await doc.save()
+
             res.send(doc)
-          }
-        )
+          })
+        }
         break
       default:
         break

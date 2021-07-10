@@ -4,3 +4,9 @@ export const pageModes = {
   CREATE: 'create',
   EDIT: 'edit',
 }
+
+export const backendActions = {
+  CREATE: 'create',
+  EDIT: 'edit',
+  ADD: 'add',
+}

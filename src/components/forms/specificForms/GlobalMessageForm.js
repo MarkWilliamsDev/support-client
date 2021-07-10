@@ -12,21 +12,10 @@ import { toJS } from 'mobx'
 
 const formId = 'messageForm'
 
-function GlobalMessageForm({
-  register,
-  handleSubmit,
-  setValue,
-  item,
-  pageMode,
-}) {
+function GlobalMessageForm({ register, handleSubmit, item, pageMode }) {
   const { uiStore, globalMessagesStore } = useStore()
 
   const router = useRouter()
-
-  useEffect(() => {
-    setValue('from', item?.from)
-    setValue('subject', item?.subject)
-  }, [item, setValue])
 
   const handleFormSubmit = (inputValues) => {
     if (!inputValues) return
@@ -95,6 +84,7 @@ function GlobalMessageForm({
             label={'From'}
             id={'fromTextInput'}
             ariaLabel={'Message from'}
+            defaultValue={item?.from}
           />
         </div>
       </div>
@@ -106,12 +96,13 @@ function GlobalMessageForm({
             label={'Subject'}
             id={'subjectTextInput'}
             ariaLabel={'Message subject'}
+            defaultValue={item?.subject}
           />
         </div>
       </div>
       <div className="row">
         <div className="col">
-          {pageMode === pageModes.CREATE ? (
+          {pageMode === pageModes.CREATE && (
             <TextArea
               label={'Message'}
               register={register}
@@ -119,19 +110,20 @@ function GlobalMessageForm({
               id={'messageTextAreaInput'}
               ariaLabel={'Message Body'}
             />
-          ) : (
-            renderMessagesEditList()
           )}
+          {pageMode === pageModes.EDIT && renderMessagesEditList()}
         </div>
       </div>
       <div className="row">
         <div className="col">
-          <ButtonContainer
-            isOutline
-            label={'Send'}
-            variant={'primary'}
-            Component={ButtonSubmit}
-          />
+          <div className="py-2 px-3">
+            <ButtonContainer
+              isOutline
+              label={'Send'}
+              variant={'primary'}
+              Component={ButtonSubmit}
+            />
+          </div>
         </div>
       </div>
     </form>

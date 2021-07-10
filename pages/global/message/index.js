@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useStore } from 'src/StoreProvider'
 import { useRouter } from 'next/router'
 
@@ -12,10 +12,14 @@ import GlobalMessageForm from '@/components/forms/specificForms/GlobalMessageFor
 import SubToolbarContainer from '@/components/ui/toolbars/subtoolbar/SubToolbarContainer'
 import MessageToolbar from '@/components/ui/toolbars/subtoolbar/MessageToolbar'
 import { pageModes } from '@/config/globalVariables'
+import GlobalMessageAddForm from '@/components/forms/specificForms/GlobalMessageAddForm'
+import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
+import ButtonFunctional from '@/components/ui/buttons/ButtonFunctional'
 
 function Message() {
   const { uiStore, globalMessagesStore } = useStore()
   const { globalMessage, globalMessages } = globalMessagesStore
+  const [showAddMessageForm, setShowAddMessageForm] = useState(false)
 
   const router = useRouter()
   const { itemId, pageMode } = router.query
@@ -26,36 +30,79 @@ function Message() {
   }, [uiStore, globalMessagesStore])
 
   useEffect(() => {
-    if (pageMode !== pageModes.CREATE) return
-    globalMessagesStore.clearGlobalMessage()
-  }, [pageMode])
-
-  useEffect(() => {
     if (uiStore.pending || !itemId) return
     globalMessagesStore.setGlobalMessage(itemId)
   }, [itemId, globalMessagesStore.setGlobalMessage, uiStore.pending])
 
-  const renderGlobalMessageForm = () => {
-    return pageMode === pageModes.CREATE ? (
-      <FormContainer Component={GlobalMessageForm} pageMode={pageMode} />
-    ) : (
-      <FormContainer
-        Component={GlobalMessageForm}
-        item={globalMessage}
-        pageMode={pageMode}
-      />
-    )
+  useEffect(() => {
+    setShowAddMessageForm(false)
+  }, [pageMode])
+
+  const toggleShowAddMessageForm = () => {
+    setShowAddMessageForm(!showAddMessageForm)
   }
 
-  const renderGlobalMessageDisplay = () => {
+  const renderCreate = () => {
+    return <FormContainer Component={GlobalMessageForm} pageMode={pageMode} />
+  }
+
+  const renderEdit = () => {
     return (
-      <ItemDisplayContainer>
-        <GlobalMessageDisplay item={globalMessage} />
-      </ItemDisplayContainer>
+      <>
+        <FormContainer
+          Component={GlobalMessageForm}
+          item={globalMessage}
+          pageMode={pageMode}
+        />
+        {showAddMessageForm
+          ? renderAddMessageForm()
+          : renderShowAddMessageButton()}
+      </>
     )
   }
 
-  const renderGlobalMessagesList = () => {
+  const renderAddMessageForm = () => {
+    return (
+      <>
+        <hr />
+        <FormContainer
+          Component={GlobalMessageAddForm}
+          setShowForm={setShowAddMessageForm}
+        />
+      </>
+    )
+  }
+
+  const renderShowAddMessageButton = () => {
+    return (
+      <>
+        <hr />
+        <ButtonContainer
+          Component={ButtonFunctional}
+          label={'Add Message'}
+          variant={'primary'}
+          isOutline
+          onClick={toggleShowAddMessageForm}
+        />
+      </>
+    )
+  }
+
+  const renderView = () => {
+    return (
+      <>
+        <ItemDisplayContainer>
+          <GlobalMessageDisplay item={globalMessage} />
+        </ItemDisplayContainer>
+        <hr />
+        {showAddMessageForm
+          ? renderAddMessageForm()
+          : renderShowAddMessageButton()}
+      </>
+    )
+  }
+
+  const renderAll = () => {
     return (
       <ListContainer
         list={globalMessages}
@@ -67,13 +114,13 @@ function Message() {
   const renderOnPageMode = () => {
     switch (pageMode) {
       case pageModes.ALL:
-        return renderGlobalMessagesList()
+        return renderAll()
       case pageModes.VIEW:
-        return renderGlobalMessageDisplay()
+        return renderView()
       case pageModes.CREATE:
-        return renderGlobalMessageForm()
+        return renderCreate()
       case pageModes.EDIT:
-        return renderGlobalMessageForm()
+        return renderEdit()
       default:
         return 'no components for page to render'
     }
@@ -82,7 +129,7 @@ function Message() {
   return (
     <>
       <SubToolbarContainer>
-        <MessageToolbar />
+        <MessageToolbar itemId={globalMessage._id} pageMode={pageMode} />
       </SubToolbarContainer>
       {renderOnPageMode()}
     </>
