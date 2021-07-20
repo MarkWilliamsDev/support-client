@@ -1,17 +1,8 @@
-function TextArea({
-  register,
-  name,
-  ariaLabel,
-  id,
-  rows = 5,
-  label,
-  defaultValue,
-}) {
+function TextArea({ name, ariaLabel, id, rows = 5, label, defaultValue }) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
       <textarea
-        {...register(name)}
         className="form-control"
         aria-label={ariaLabel}
         id={id}

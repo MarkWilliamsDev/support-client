@@ -8,17 +8,10 @@ import { useRouter } from 'next/router'
 import { useStore } from 'src/StoreProvider'
 import DateDisplay from '@/components/display/elements/DateDisplay'
 import TextAreaWithFormatting from '@/components/forms/elements/TextAreaWithFormatting'
-import { Controller } from 'react-hook-form'
 
 const formId = 'messageForm'
 
-function GlobalMessageForm({
-  register,
-  control,
-  handleSubmit,
-  item,
-  pageMode,
-}) {
+function GlobalMessageForm({ item, pageMode }) {
   const { uiStore, globalMessagesStore } = useStore()
 
   const router = useRouter()
@@ -74,7 +67,6 @@ function GlobalMessageForm({
             id={`message${index}Input`}
             index={index}
             defaultValue={message.message}
-            register={register}
             name={`message.${index}`}
           />
         </div>
@@ -83,11 +75,10 @@ function GlobalMessageForm({
   }
 
   return (
-    <form id={formId} onSubmit={handleSubmit(handleFormSubmit)}>
+    <form id={formId}>
       <div className="row">
         <div className="col">
           <TextInput
-            register={register}
             name={'from'}
             label={'From'}
             id={'fromTextInput'}
@@ -99,7 +90,6 @@ function GlobalMessageForm({
       <div className="row">
         <div className="col">
           <TextInput
-            register={register}
             name={'subject'}
             label={'Subject'}
             id={'subjectTextInput'}
@@ -110,26 +100,7 @@ function GlobalMessageForm({
       </div>
       <div className="row">
         <div className="col">
-          {pageMode === pageModes.CREATE && (
-            <>
-              <Controller
-                name={'message'}
-                control={control}
-                defaultValue={''}
-                render={({ value, onChange }) => (
-                  <TextAreaWithFormatting value={value} onChange={onChange} />
-                )}
-              />
-
-              {/* <TextArea
-              label={'Message'}
-              register={register}
-              name={'message'}
-              id={'messageTextAreaInput'}
-              ariaLabel={'Message Body'}
-              /> */}
-            </>
-          )}
+          {pageMode === pageModes.CREATE && <TextAreaWithFormatting />}
           {pageMode === pageModes.EDIT && renderMessagesEditList()}
         </div>
       </div>
