@@ -11,7 +11,13 @@ import TextAreaWithFormatting from '@/components/forms/elements/TextAreaWithForm
 
 const formId = 'messageForm'
 
-function GlobalMessageForm({ item, pageMode }) {
+function GlobalMessageForm({
+  item,
+  pageMode,
+  register,
+  handleSubmit,
+  control,
+}) {
   const { uiStore, globalMessagesStore } = useStore()
 
   const router = useRouter()
@@ -75,12 +81,13 @@ function GlobalMessageForm({ item, pageMode }) {
   }
 
   return (
-    <form id={formId}>
+    <form id={formId} onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="row">
         <div className="col">
           <TextInput
             name={'from'}
             label={'From'}
+            register={register}
             id={'fromTextInput'}
             ariaLabel={'Message from'}
             defaultValue={item?.from}
@@ -92,6 +99,7 @@ function GlobalMessageForm({ item, pageMode }) {
           <TextInput
             name={'subject'}
             label={'Subject'}
+            register={register}
             id={'subjectTextInput'}
             ariaLabel={'Message subject'}
             defaultValue={item?.subject}
@@ -100,7 +108,9 @@ function GlobalMessageForm({ item, pageMode }) {
       </div>
       <div className="row">
         <div className="col">
-          {pageMode === pageModes.CREATE && <TextAreaWithFormatting />}
+          {pageMode === pageModes.CREATE && (
+            <TextAreaWithFormatting name={'message'} control={control} />
+          )}
           {pageMode === pageModes.EDIT && renderMessagesEditList()}
         </div>
       </div>
