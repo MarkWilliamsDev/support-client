@@ -5,14 +5,20 @@ import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
 import StringDisplay from '@/components/display/elements/StringDisplay'
 import { pageModes } from '@/config/globalVariables'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { useStore } from 'src/StoreProvider'
 import DateDisplay from '@/components/display/elements/DateDisplay'
-import { toJS } from 'mobx'
+import TextAreaWithFormatting from '@/components/forms/elements/TextAreaWithFormatting'
+import { Controller } from 'react-hook-form'
 
 const formId = 'messageForm'
 
-function GlobalMessageForm({ register, handleSubmit, item, pageMode }) {
+function GlobalMessageForm({
+  register,
+  control,
+  handleSubmit,
+  item,
+  pageMode,
+}) {
   const { uiStore, globalMessagesStore } = useStore()
 
   const router = useRouter()
@@ -27,12 +33,14 @@ function GlobalMessageForm({ register, handleSubmit, item, pageMode }) {
     switch (pageMode) {
       case pageModes.CREATE:
         {
-          globalMessagesStore.submitMessage(inputValues)
+          // globalMessagesStore.submitMessage(inputValues)
 
-          router.push({
-            pathname: '/global/message',
-            query: { pageMode: pageModes.ALL },
-          })
+          // router.push({
+          //   pathname: '/global/message',
+          //   query: { pageMode: pageModes.ALL },
+          // })
+
+          console.log(inputValues)
         }
         break
       case pageModes.EDIT:
@@ -103,13 +111,24 @@ function GlobalMessageForm({ register, handleSubmit, item, pageMode }) {
       <div className="row">
         <div className="col">
           {pageMode === pageModes.CREATE && (
-            <TextArea
+            <>
+              <Controller
+                name={'message'}
+                control={control}
+                defaultValue={''}
+                render={({ value, onChange }) => (
+                  <TextAreaWithFormatting value={value} onChange={onChange} />
+                )}
+              />
+
+              {/* <TextArea
               label={'Message'}
               register={register}
               name={'message'}
               id={'messageTextAreaInput'}
               ariaLabel={'Message Body'}
-            />
+              /> */}
+            </>
           )}
           {pageMode === pageModes.EDIT && renderMessagesEditList()}
         </div>

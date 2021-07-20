@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 
 function FormContainer({ Component, item, setShowForm, pageMode }) {
-  const { register, handleSubmit, setValue } = useForm()
+  const { register, control, handleSubmit, setValue } = useForm()
 
   return (
     <Component
@@ -11,6 +11,7 @@ function FormContainer({ Component, item, setShowForm, pageMode }) {
       setShowForm={setShowForm}
       setValue={setValue}
       pageMode={pageMode}
+      control={control}
     />
   )
 }
