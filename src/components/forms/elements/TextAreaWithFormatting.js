@@ -30,7 +30,8 @@ function TextAreaWithFormatting({
       defaultValue={value}
       {...props}
       {...inputProps}
-      setOptions={{ buttonList: customButtonList }}
+      height={'400px'}
+      setOptions={{ buttonList: customButtonList, linkProtocol: 'https://' }}
     />
   )
 }

@@ -1,11 +1,11 @@
-import TextArea from '@/components/forms/elements/TextArea'
+import TextAreaWithFormatting from '@/components/forms/elements/TextAreaWithFormatting'
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
 import { useStore } from 'src/StoreProvider'
 
 const formId = 'addMessageForm'
 
-function GlobalMessageAddForm({ handleSubmit, register, setShowForm }) {
+function GlobalMessageAddForm({ handleSubmit, setShowForm, control }) {
   const { uiStore, globalMessagesStore } = useStore()
 
   const handleFormSubmit = (inputValues) => {
@@ -18,11 +18,10 @@ function GlobalMessageAddForm({ handleSubmit, register, setShowForm }) {
 
   return (
     <form id={formId} onSubmit={handleSubmit(handleFormSubmit)}>
-      <TextArea
+      <TextAreaWithFormatting
         label={'Add Message: '}
-        register={register}
         name={'message'}
-        id={'addMessageInput'}
+        control={control}
       />
       <ButtonContainer
         variant={'primary'}

@@ -32,14 +32,12 @@ function GlobalMessageForm({
     switch (pageMode) {
       case pageModes.CREATE:
         {
-          // globalMessagesStore.submitMessage(inputValues)
+          globalMessagesStore.submitMessage(inputValues)
 
-          // router.push({
-          //   pathname: '/global/message',
-          //   query: { pageMode: pageModes.ALL },
-          // })
-
-          console.log(inputValues)
+          router.push({
+            pathname: '/global/message',
+            query: { pageMode: pageModes.ALL },
+          })
         }
         break
       case pageModes.EDIT:
@@ -69,11 +67,10 @@ function GlobalMessageForm({
           <hr />
           <DateDisplay date={message.createdAt} />
           <StringDisplay content={message._id} />
-          <TextArea
-            id={`message${index}Input`}
-            index={index}
+          <TextAreaWithFormatting
             defaultValue={message.message}
             name={`message.${index}`}
+            control={control}
           />
         </div>
       )
