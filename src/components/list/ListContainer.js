@@ -6,13 +6,15 @@ function ListContainer({ list, ItemComponent, onItemSelect }) {
   }
 
   const renderList = () => {
-    return list?.map((item) => {
-      return (
-        <ItemContainer key={item._id}>
-          {renderItemComponent(item)}
-        </ItemContainer>
-      )
-    })
+    if (list?.length) {
+      return list?.map((item) => {
+        return (
+          <ItemContainer key={item._id}>
+            {renderItemComponent(item)}
+          </ItemContainer>
+        )
+      })
+    }
   }
 
   return <div className="container">{renderList()}</div>

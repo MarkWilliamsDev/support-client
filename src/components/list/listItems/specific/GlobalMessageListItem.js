@@ -1,17 +1,16 @@
 import DateDisplay from '@/components/display/elements/DateDisplay'
 import StringDisplay from '@/components/display/elements/StringDisplay'
+import ReactHTMLParser from 'react-html-parser'
 
-function MessageListItem({ item }) {
+function GlobalMessageListItem({ item }) {
   return (
-    <div className="border mb-1">
-      <div className="px-2 py-1">
-        <StringDisplay content={item._id} />
-        <DateDisplay date={item.createdAt} />
-        <StringDisplay content={item.subject} />
-        <StringDisplay content={item.from} />
-      </div>
+    <div>
+      <hr />
+      <DateDisplay date={item.createdAt} />
+      {ReactHTMLParser(item.message)}
+      <StringDisplay content={item._id} />
     </div>
   )
 }
 
-export default MessageListItem
+export default GlobalMessageListItem

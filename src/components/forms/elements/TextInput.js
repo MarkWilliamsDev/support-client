@@ -1,13 +1,14 @@
-function TextInput({ id, name, register, ariaLabel, label }) {
+function TextInput({ id, name, ariaLabel, label, defaultValue, register }) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
       <input
         className="form-control"
+        {...register(name)}
         id={id}
         type="text"
-        {...register(name)}
         aria-label={ariaLabel}
+        defaultValue={defaultValue}
       />
     </>
   )

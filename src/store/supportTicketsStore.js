@@ -7,7 +7,7 @@ enableStaticRendering(typeof window === 'undefined')
 export class SupportTicketsStore {
   supportTickets = []
   supportTicket = {}
-  supportTicketIndex = 0
+  supportTicketIndex = null
 
   constructor(rootStore) {
     makeAutoObservable(this)

@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
-const LinkContainer = ({ label, linkPathname }) => {
+const LinkContainer = ({ children, pathname, query }) => {
   return (
-    <Link href={linkPathname}>
-      <a>{label}</a>
+    <Link href={{ pathname, query }}>
+      <a style={{ textDecoration: 'none', color: 'inherit' }}>{children}</a>
     </Link>
   )
 }

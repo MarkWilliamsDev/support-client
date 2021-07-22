@@ -14,8 +14,8 @@ function MainToolbar() {
   const renderMessagesButton = () => (
     <ButtonContainer
       variant={'primary'}
-      pathname={'/message'}
-      label={'Global Messages'}
+      pathname={'/global'}
+      label={'Global'}
       Component={LinkButton}
     />
   )
