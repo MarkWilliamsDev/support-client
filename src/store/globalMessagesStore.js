@@ -27,9 +27,7 @@ export class GlobalMessagesStore {
   }
 
   setGlobalMessage(itemId) {
-    const itemIndex = this.globalMessages.findIndex(
-      (item) => item._id === itemId
-    )
+    const itemIndex = this.globalMessages.findIndex((item) => item._id === itemId)
 
     this.globalMessage = this.globalMessages[itemIndex]
 
@@ -41,10 +39,7 @@ export class GlobalMessagesStore {
   }
 
   async submitMessage(valuesToSubmit) {
-    const res = await axios.post(
-      `/api/global/messages/${CREATE}`,
-      valuesToSubmit
-    )
+    const res = await axios.post(`/api/global/messages/${CREATE}`, valuesToSubmit)
 
     const newItem = res.data
 
