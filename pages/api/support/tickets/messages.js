@@ -9,6 +9,8 @@ const handler = async (req, res) => {
 
         const supportTicket = await SupportTicket.findById(itemId)
 
+        console.log(message)
+
         supportTicket.hasNewMessage = true
         supportTicket.lastMessageFromUser = false
 

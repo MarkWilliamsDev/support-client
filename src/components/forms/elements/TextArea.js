@@ -1,4 +1,4 @@
-function TextArea({ name, ariaLabel, id, rows = 5, label, defaultValue }) {
+function TextArea({ name, ariaLabel, id, rows = 5, label, defaultValue, register }) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
@@ -8,6 +8,7 @@ function TextArea({ name, ariaLabel, id, rows = 5, label, defaultValue }) {
         id={id}
         rows={rows}
         defaultValue={defaultValue}
+        {...register(name)}
       />
     </>
   )

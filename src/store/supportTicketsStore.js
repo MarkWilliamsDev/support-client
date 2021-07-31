@@ -24,9 +24,7 @@ export class SupportTicketsStore {
   }
 
   setSupportTicket(itemId) {
-    const supportTicketIndex = this.supportTickets.findIndex(
-      (item) => item._id === itemId
-    )
+    const supportTicketIndex = this.supportTickets.findIndex((item) => item._id === itemId)
 
     this.supportTicket = this.supportTickets[supportTicketIndex]
 

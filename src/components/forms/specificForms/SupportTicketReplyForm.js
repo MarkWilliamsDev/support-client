@@ -5,12 +5,7 @@ import TextArea from '@/components/forms/elements/TextArea'
 import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 
-const SupportTicketReplyForm = ({
-  item,
-  setShowForm,
-  register,
-  handleSubmit,
-}) => {
+const SupportTicketReplyForm = ({ item, setShowForm, register, handleSubmit }) => {
   const { uiStore, supportTicketsStore } = useStore()
 
   const formId = 'SupportTicketReplyForm'
@@ -37,6 +32,7 @@ const SupportTicketReplyForm = ({
               name={'message'}
               ariaLabel="Reply text area"
               id={'reply-message-textarea'}
+              defaultValue={item?.message}
             />
           </div>
         </div>
