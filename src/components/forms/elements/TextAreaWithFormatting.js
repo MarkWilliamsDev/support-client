@@ -12,15 +12,10 @@ const customButtonList = [
   ['outdent', 'indent'],
   ['align', 'horizontalRule', 'list'],
   ['link'],
-  ['fullScreen', 'showBlocks', 'codeView'],
+  ['image'],
 ]
 
-function TextAreaWithFormatting({
-  name,
-  defaultValue = '',
-  control,
-  ...props
-}) {
+function TextAreaWithFormatting({ name, defaultValue = '', control, ...props }) {
   const {
     field: { value, ...inputProps },
   } = useController({ name, control, defaultValue })
