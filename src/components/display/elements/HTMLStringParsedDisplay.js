@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import parse, { domToReact } from 'html-react-parser'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -51,11 +52,15 @@ function HTMLStringParsedDisplay({ htmlString }) {
         break
     }
   }
-  const parsedMessageHtml = parse(htmlString, {
+  const parsedHtml = parse(htmlString, {
     replace: (domNode) => handleReplace(domNode),
   })
 
-  return <>{parsedMessageHtml}</>
+  return parsedHtml
+}
+
+HTMLStringParsedDisplay.propTypes = {
+  htmlString: PropTypes.string,
 }
 
 export default HTMLStringParsedDisplay

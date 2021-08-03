@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 function TextArea({ name, ariaLabel, id, rows = 5, label, defaultValue, register }) {
   return (
     <>
@@ -12,6 +14,16 @@ function TextArea({ name, ariaLabel, id, rows = 5, label, defaultValue, register
       />
     </>
   )
+}
+
+TextArea.propTypes = {
+  name: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  id: PropTypes.string,
+  rows: PropTypes.number,
+  label: PropTypes.string,
+  defaultValue: PropTypes.string,
+  register: PropTypes.func,
 }
 
 export default TextArea

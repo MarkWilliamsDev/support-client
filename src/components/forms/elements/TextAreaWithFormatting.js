@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useController } from 'react-hook-form'
+import PropTypes from 'prop-types'
 const SunEditor = dynamic(() => import('suneditor-react'), { ssr: false })
 import 'suneditor/dist/css/suneditor.min.css'
 
@@ -29,6 +30,13 @@ function TextAreaWithFormatting({ name, defaultValue = '', control, ...props }) 
       setOptions={{ buttonList: customButtonList, linkProtocol: 'https://' }}
     />
   )
+}
+
+TextAreaWithFormatting.propTypes = {
+  name: PropTypes.string,
+  defaultValue: PropTypes.string,
+  control: PropTypes.object,
+  props: PropTypes.object,
 }
 
 export default TextAreaWithFormatting

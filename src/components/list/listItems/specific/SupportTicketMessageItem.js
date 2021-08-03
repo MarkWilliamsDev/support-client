@@ -1,3 +1,4 @@
+import { messagePropTypes } from '@/propTypes'
 import DateDisplay from '../../../display/elements/DateDisplay'
 import StringDisplay from '../../../display/elements/StringDisplay'
 
@@ -29,6 +30,10 @@ function SupportTicketMessageItem({ item }) {
       </div>
     </div>
   )
+}
+
+SupportTicketMessageItem.propTypes = {
+  item: messagePropTypes,
 }
 
 export default SupportTicketMessageItem

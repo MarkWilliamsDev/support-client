@@ -1,9 +1,11 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../../../StoreProvider'
+import PropTypes from 'prop-types'
 
 import TextArea from '@/components/forms/elements/TextArea'
 import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
+import { supportTicketPropTypes } from '@/propTypes'
 
 const SupportTicketReplyForm = ({ item, setShowForm, register, handleSubmit }) => {
   const { uiStore, supportTicketsStore } = useStore()
@@ -52,6 +54,13 @@ const SupportTicketReplyForm = ({ item, setShowForm, register, handleSubmit }) =
       </div>
     </form>
   )
+}
+
+SupportTicketReplyForm.propTypes = {
+  item: supportTicketPropTypes,
+  setShowForm: PropTypes.func,
+  register: PropTypes.func,
+  handleSubmit: PropTypes.func,
 }
 
 export default observer(SupportTicketReplyForm)

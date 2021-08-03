@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 function TextInput({ id, name, ariaLabel, label, defaultValue, register }) {
   return (
     <>
@@ -12,6 +14,15 @@ function TextInput({ id, name, ariaLabel, label, defaultValue, register }) {
       />
     </>
   )
+}
+
+TextInput.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  label: PropTypes.string,
+  defaultValue: PropTypes.string,
+  register: PropTypes.func,
 }
 
 export default TextInput

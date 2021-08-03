@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 function SelectInput({ onChange, options, currentOption }) {
   const [selectedOption, setSelectedOption] = useState('')
@@ -26,6 +27,12 @@ function SelectInput({ onChange, options, currentOption }) {
       </select>
     </div>
   )
+}
+
+SelectInput.propTypes = {
+  onChange: PropTypes.func,
+  options: PropTypes.array,
+  currentOption: PropTypes.string,
 }
 
 export default SelectInput

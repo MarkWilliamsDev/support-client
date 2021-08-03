@@ -1,4 +1,5 @@
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
+import { supportTicketPropTypes } from '@/propTypes'
 import DateDisplay from '../../../display/elements/DateDisplay'
 import StringDisplay from '../../../display/elements/StringDisplay'
 import LinkButton from '../../../ui/buttons/LinkButton'
@@ -35,6 +36,10 @@ const SupportTicketListItem = ({ item }) => {
       <hr />
     </div>
   )
+}
+
+SupportTicketListItem.propTypes = {
+  item: supportTicketPropTypes,
 }
 
 export default SupportTicketListItem

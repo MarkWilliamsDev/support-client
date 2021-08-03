@@ -2,6 +2,7 @@ import DateDisplay from '@/components/display/elements/DateDisplay'
 import StringDisplay from '@/components/display/elements/StringDisplay'
 import LinkContainer from '@/components/ui/link/LinkContainer'
 import { pageModes } from '@/config/globalVariables'
+import { messagePropTypes } from '@/propTypes'
 
 function MessageListItem({ item }) {
   return (
@@ -19,6 +20,10 @@ function MessageListItem({ item }) {
       </div>
     </LinkContainer>
   )
+}
+
+MessageListItem.propTypes = {
+  item: messagePropTypes,
 }
 
 export default MessageListItem
