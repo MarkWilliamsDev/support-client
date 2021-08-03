@@ -32,7 +32,7 @@ function Message() {
   useEffect(() => {
     if (uiStore.pending || !itemId) return
     globalMessagesStore.setGlobalMessage(itemId)
-  }, [itemId, globalMessagesStore.setGlobalMessage, uiStore.pending])
+  }, [itemId, globalMessagesStore, uiStore.pending])
 
   useEffect(() => {
     setShowAddMessageForm(false)
@@ -49,14 +49,8 @@ function Message() {
   const renderEdit = () => {
     return (
       <>
-        <FormContainer
-          Component={GlobalMessageForm}
-          item={globalMessage}
-          pageMode={pageMode}
-        />
-        {showAddMessageForm
-          ? renderAddMessageForm()
-          : renderShowAddMessageButton()}
+        <FormContainer Component={GlobalMessageForm} item={globalMessage} pageMode={pageMode} />
+        {showAddMessageForm ? renderAddMessageForm() : renderShowAddMessageButton()}
       </>
     )
   }
@@ -65,10 +59,7 @@ function Message() {
     return (
       <>
         <hr />
-        <FormContainer
-          Component={GlobalMessageAddForm}
-          setShowForm={setShowAddMessageForm}
-        />
+        <FormContainer Component={GlobalMessageAddForm} setShowForm={setShowAddMessageForm} />
       </>
     )
   }
@@ -95,20 +86,13 @@ function Message() {
           <GlobalMessageDisplay item={globalMessage} />
         </ItemDisplayContainer>
         <hr />
-        {showAddMessageForm
-          ? renderAddMessageForm()
-          : renderShowAddMessageButton()}
+        {showAddMessageForm ? renderAddMessageForm() : renderShowAddMessageButton()}
       </>
     )
   }
 
   const renderAll = () => {
-    return (
-      <ListContainer
-        list={globalMessages}
-        ItemComponent={GlobalMessagesListItem}
-      />
-    )
+    return <ListContainer list={globalMessages} ItemComponent={GlobalMessagesListItem} />
   }
 
   const renderOnPageMode = () => {
