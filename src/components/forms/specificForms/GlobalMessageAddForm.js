@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import TextAreaWithFormatting from '@/components/forms/elements/TextAreaWithFormatting'
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
@@ -18,11 +19,7 @@ function GlobalMessageAddForm({ handleSubmit, setShowForm, control }) {
 
   return (
     <form id={formId} onSubmit={handleSubmit(handleFormSubmit)}>
-      <TextAreaWithFormatting
-        label={'Add Message: '}
-        name={'message'}
-        control={control}
-      />
+      <TextAreaWithFormatting label={'Add Message: '} name={'message'} control={control} />
       <ButtonContainer
         variant={'primary'}
         isOutline
@@ -31,6 +28,12 @@ function GlobalMessageAddForm({ handleSubmit, setShowForm, control }) {
       />
     </form>
   )
+}
+
+GlobalMessageAddForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  setShowForm: PropTypes.func,
+  control: PropTypes.object,
 }
 
 export default GlobalMessageAddForm

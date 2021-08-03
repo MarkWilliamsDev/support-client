@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types'
+
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 import LinkButton from '@/components/ui/buttons/LinkButton'
-import { pageModes } from '@/config/globalVariables'
+import { pageModes, pageModesArray } from '@/config/globalVariables'
 
 function MessageToolbar({ itemId, pageMode }) {
   const renderCreateButton = () => {
@@ -71,6 +73,11 @@ function MessageToolbar({ itemId, pageMode }) {
       {renderViewButton()}
     </>
   )
+}
+
+MessageToolbar.propTypes = {
+  itemId: PropTypes.string,
+  pageMode: PropTypes.oneOf(pageModesArray),
 }
 
 export default MessageToolbar

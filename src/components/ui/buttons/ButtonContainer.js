@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const ButtonContainer = ({
   Component,
   isOutline,
@@ -22,6 +24,17 @@ const ButtonContainer = ({
       isDisabled={isDisabled}
     />
   )
+}
+
+ButtonContainer.propTypes = {
+  Component: PropTypes.func,
+  isOutline: PropTypes.bool,
+  variant: PropTypes.string,
+  label: PropTypes.string,
+  pathname: PropTypes.string,
+  query: PropTypes.object,
+  onClick: PropTypes.func,
+  isDisabled: PropTypes.bool,
 }
 
 export default ButtonContainer

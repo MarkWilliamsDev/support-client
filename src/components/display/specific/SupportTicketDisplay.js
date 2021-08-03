@@ -8,28 +8,21 @@ import SupportTicketMessageItem from '@/components/list/listItems/specific/Suppo
 import ItemDisplayToolbar from '@/components/ui/toolbars/ItemDisplayToolbar'
 import InfoHeaderContainer from '@/components/headers/InfoHeader/InfoHeaderContainer'
 import SupportTicketInfoHeader from '@/components/headers/InfoHeader/SupportTicketInfoHeader'
+import { supportTicketPropTypes } from '@/propTypes'
 
 function SupportTicketDisplay({ item }) {
   const [showForm, setShowForm] = useState(false)
 
   const renderMessages = () => {
     const reversedList = item?.messages?.slice().reverse()
-    return (
-      <ListContainer
-        list={reversedList}
-        ItemComponent={SupportTicketMessageItem}
-      />
-    )
+    return <ListContainer list={reversedList} ItemComponent={SupportTicketMessageItem} />
   }
 
   const renderToolbar = () => {
     const label = showForm ? 'Hide Form' : 'Reply'
     return (
       <ItemDisplayToolbar>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="btn btn-outline-primary"
-        >
+        <button onClick={() => setShowForm(!showForm)} className="btn btn-outline-primary">
           {label}
         </button>
       </ItemDisplayToolbar>
@@ -38,11 +31,7 @@ function SupportTicketDisplay({ item }) {
 
   const renderForm = () => {
     return (
-      <FormContainer
-        Component={SupportTicketReplyForm}
-        item={item}
-        setShowForm={setShowForm}
-      />
+      <FormContainer Component={SupportTicketReplyForm} item={item} setShowForm={setShowForm} />
     )
   }
 
@@ -59,5 +48,7 @@ function SupportTicketDisplay({ item }) {
     </>
   )
 }
+
+SupportTicketDisplay.propTypes = { item: supportTicketPropTypes }
 
 export default observer(SupportTicketDisplay)

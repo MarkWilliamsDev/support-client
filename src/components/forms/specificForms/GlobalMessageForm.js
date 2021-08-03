@@ -1,23 +1,18 @@
-import TextArea from '@/components/forms/elements/TextArea'
+import PropTypes from 'prop-types'
 import TextInput from '@/components/forms/elements/TextInput'
 import ButtonContainer from '@/components/ui/buttons/ButtonContainer'
 import ButtonSubmit from '@/components/ui/buttons/ButtonSubmit'
 import StringDisplay from '@/components/display/elements/StringDisplay'
-import { pageModes } from '@/config/globalVariables'
+import { pageModes, pageModesArray } from '@/config/globalVariables'
 import { useRouter } from 'next/router'
 import { useStore } from 'src/StoreProvider'
 import DateDisplay from '@/components/display/elements/DateDisplay'
 import TextAreaWithFormatting from '@/components/forms/elements/TextAreaWithFormatting'
+import { globalMessagePropTypes } from '@/propTypes'
 
 const formId = 'messageForm'
 
-function GlobalMessageForm({
-  item,
-  pageMode,
-  register,
-  handleSubmit,
-  control,
-}) {
+function GlobalMessageForm({ item, pageMode, register, handleSubmit, control }) {
   const { uiStore, globalMessagesStore } = useStore()
 
   const router = useRouter()
@@ -125,6 +120,14 @@ function GlobalMessageForm({
       </div>
     </form>
   )
+}
+
+GlobalMessageForm.propTypes = {
+  item: globalMessagePropTypes,
+  pageMode: PropTypes.oneOf(pageModesArray),
+  register: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  control: PropTypes.object,
 }
 
 export default GlobalMessageForm

@@ -2,7 +2,7 @@ import StringDisplay from '@/components/display/elements/StringDisplay'
 import DateDisplay from '@/components/display/elements/DateDisplay'
 import SelectInput from '@/components/forms/elements/SelectInput'
 import { useStore } from 'src/StoreProvider'
-import { toJS } from 'mobx'
+import { supportTicketPropTypes } from '@/propTypes'
 
 const statusOptions = ['active', 'closed']
 
@@ -57,5 +57,7 @@ function SupportTicketInfoHeader({ item }) {
     </div>
   )
 }
+
+SupportTicketInfoHeader.propTypes = { item: supportTicketPropTypes }
 
 export default SupportTicketInfoHeader

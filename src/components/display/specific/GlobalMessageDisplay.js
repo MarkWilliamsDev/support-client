@@ -2,6 +2,7 @@ import ListContainer from '@/components/list/ListContainer'
 import StringDisplay from '@/components/display/elements/StringDisplay'
 import GlobalMessageListItem from '@/components/list/listItems/specific/GlobalMessageListItem'
 import DateDisplay from '@/components/display/elements/DateDisplay'
+import { globalMessagePropTypes } from 'src/propTypes'
 
 function GlobalMessageDisplay({ item }) {
   return (
@@ -10,12 +11,11 @@ function GlobalMessageDisplay({ item }) {
       <DateDisplay date={item.createdAt} />
       <StringDisplay content={item.from} />
       <StringDisplay content={item.subject} />
-      <ListContainer
-        ItemComponent={GlobalMessageListItem}
-        list={item.messages}
-      />
+      <ListContainer ItemComponent={GlobalMessageListItem} list={item.messages} />
     </div>
   )
 }
+
+GlobalMessageDisplay.propTypes = { item: globalMessagePropTypes }
 
 export default GlobalMessageDisplay

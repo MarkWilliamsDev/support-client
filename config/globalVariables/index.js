@@ -5,6 +5,8 @@ export const pageModes = {
   EDIT: 'edit',
 }
 
+export const pageModesArray = Object.values(pageModes)
+
 export const backendActions = {
   CREATE: 'create',
   EDIT: 'edit',
