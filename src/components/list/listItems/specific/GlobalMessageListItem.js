@@ -14,6 +14,6 @@ function GlobalMessageListItem({ item }) {
   )
 }
 
-GlobalMessageListItem.propTypes = messagePropTypes
+GlobalMessageListItem.propTypes = { item: messagePropTypes }
 
 export default GlobalMessageListItem
