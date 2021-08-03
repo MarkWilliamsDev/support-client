@@ -2,7 +2,7 @@ import ListContainer from '@/components/list/ListContainer'
 import StringDisplay from '@/components/display/elements/StringDisplay'
 import GlobalMessageListItem from '@/components/list/listItems/specific/GlobalMessageListItem'
 import DateDisplay from '@/components/display/elements/DateDisplay'
-import { globalMessagePropTypes } from 'src/propTypes'
+import { globalMessagePropTypes } from '@/propTypes'
 
 function GlobalMessageDisplay({ item }) {
   return (
