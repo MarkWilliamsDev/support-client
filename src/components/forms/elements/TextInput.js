@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-function TextInput({ id, name, ariaLabel, label, defaultValue, register }) {
+function TextInput({ id, name, ariaLabel, label, defaultValue, register, isRequired = false }) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
@@ -11,6 +11,7 @@ function TextInput({ id, name, ariaLabel, label, defaultValue, register }) {
         type="text"
         aria-label={ariaLabel}
         defaultValue={defaultValue}
+        required={isRequired}
       />
     </>
   )

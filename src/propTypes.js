@@ -16,8 +16,8 @@ const messages = arrayOf(messagePropTypes)
 export const globalMessagePropTypes = shape({
   _id,
   createdAt,
-  from: string,
-  subject,
+  from: string.isRequired,
+  subject: subject.isRequired,
   messages,
 })
 
