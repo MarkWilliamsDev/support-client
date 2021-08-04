@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { pageModesArray } from '@/config/globalVariables'
 
 function FormContainer({ Component, item, setShowForm, pageMode }) {
-  const { register, handleSubmit, setValue, control } = useForm()
+  const { register, handleSubmit, setValue, control, watch } = useForm()
+  console.log(watch())
 
   return (
     <Component
@@ -19,7 +20,7 @@ function FormContainer({ Component, item, setShowForm, pageMode }) {
 }
 
 FormContainer.propTypes = {
-  Component: PropTypes.object,
+  Component: PropTypes.func,
   item: PropTypes.object,
   setShowForm: PropTypes.func,
   pageMode: PropTypes.oneOf(pageModesArray),

@@ -8,7 +8,7 @@ function GlobalMessageListItem({ item }) {
     <div>
       <hr />
       <DateDisplay date={item.createdAt} />
-      <HTMLStringParsedDisplay disableContentEditableWarning htmlString={item.message} />
+      <HTMLStringParsedDisplay htmlString={item.message} />
       <StringDisplay content={item._id} />
     </div>
   )
