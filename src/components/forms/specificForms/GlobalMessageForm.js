@@ -79,6 +79,7 @@ function GlobalMessageForm({ item, pageMode, register, handleSubmit, control }) 
           <TextInput
             name={'from'}
             label={'From'}
+            isRequired
             register={register}
             id={'fromTextInput'}
             ariaLabel={'Message from'}
@@ -91,6 +92,7 @@ function GlobalMessageForm({ item, pageMode, register, handleSubmit, control }) 
           <TextInput
             name={'subject'}
             label={'Subject'}
+            isRequired
             register={register}
             id={'subjectTextInput'}
             ariaLabel={'Message subject'}
