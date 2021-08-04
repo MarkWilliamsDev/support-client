@@ -29,6 +29,7 @@ function HTMLStringParsedDisplay({ htmlString }) {
 
           const width = parseInt(widthString)
           const height = parseInt(heightString)
+
           const alignment = imgAttribs['data-align']
           const float = alignment === 'none' ? 'left' : alignment
 
